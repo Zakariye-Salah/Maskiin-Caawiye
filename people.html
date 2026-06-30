@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maskiin Caawiye - People Management</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- App Styles -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/people.css">
+</head>
+
+<body class="bg-body-tertiary">
+
+    <!-- HEADER (same structure as dashboard) -->
+    <div id="headerContainer"></div>
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h4 id="" class="fw-bold m-0">Family page</h4>
+    
+        <button
+            id="btnAddNewFamily"
+            class="btn btn-primary fw-bold"
+            onclick="openFormModal()">
+            <i class="bi bi-plus-circle"></i>
+            + Add New Family
+        </button>
+    </div>
+    <!-- PAGE CONTENT -->
+    <div class="container-fluid px-4 pb-5">
+
+        <div class="card p-3 mb-4 shadow-sm border-0">
+            <div class="row g-2">
+                <div class="col-md-3">
+                    <input type="text" id="globalSearch" class="form-control" placeholder="Search by name or phone...">
+                </div>
+                <div class="col-md-2">
+                    <select id="filterGender" class="form-select">
+                        <option value="" id="optGenAll">All Genders</option>
+                        <option value="male" id="optGenMale">Male</option>
+                        <option value="female" id="optGenFemale">Female</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <select id="filterRegion" class="form-select">
+                        <option value="" id="optRegAll">All Regions</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <select id="filterDistrict" class="form-select">
+                        <option value="" id="optDistAll">All Districts</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <select id="sortOrder" class="form-select">
+                        <option value="name-asc" id="optSortNameAsc">Name (A-Z)</option>
+                        <option value="name-desc" id="optSortNameDesc">Name (Z-A)</option>
+                        <option value="date-desc" id="optSortNewest">Newest Added</option>
+                        <option value="money-desc" id="optSortMoneyDesc">Highest Allocation</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="card p-3 shadow-sm border-0 mb-5">
+            <h5 class="mb-3 text-secondary fw-bold" id="lblDirectoryHeading">
+                Beneficiary Directory Registry Ledger
+            </h5>
+
+            <!-- DESKTOP TABLE -->
+            <div class="table-responsive" id="desktopPeopleWrapper">
+                <table class="table table-hover align-middle m-0">
+                    <thead class="table-dark">
+                        <tr>
+                            <th id="thName">Name</th>
+                            <th id="thPhone">Phone</th>
+                            <th id="thLocation">Location Details</th>
+                            <th id="thStatus">Status</th>
+                            <th id="thTotalAward">Total Award</th>
+                            <th class="text-center" id="thAction">Action Framework</th>
+                        </tr>
+                    </thead>
+                    <tbody id="peopleListBody"></tbody>
+                </table>
+            </div>
+
+            <!-- MOBILE LIST -->
+            <div id="mobilePeopleWrapper"></div>
+        </div>
+
+    </div>
+
+    <!-- FORM MODAL -->
+    <div class="form-modal-overlay" id="formModalOverlay">
+        <div class="form-modal-card">
+            <div class="form-modal-header">
+                <h5 id="formTitle" class="m-0 fw-bold text-primary">
+                    Add New Family Profile
+                </h5>
+                <button class="close-modal-btn" onclick="closeFormModal()">&times;</button>
+            </div>
+
+            <div class="form-modal-body">
+                <form id="addFamilyForm">
+                    <input type="hidden" id="personId">
+
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold" id="formLblFullName">
+                            Full Name <span class="text-danger">*</span>
+                        </label>
+                        <input type="text" id="fullName" class="form-control" required placeholder="Ex: Axmed Cali">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold" id="formLblPhone">
+                            Phone Number <span class="text-danger">*</span>
+                        </label>
+                        <input type="tel" id="phone" class="form-control" required placeholder="Ex: 617125558">
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold" id="formLblRegion">Region</label>
+                            <select id="regionSelect" class="form-select"></select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold" id="formLblDistrict">District</label>
+                            <select id="districtSelect" class="form-select"></select>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold" id="formLblNeighborhood">Neighborhood</label>
+                            <input type="text" id="neighborhood" class="form-control" placeholder="Ex: Hodan">
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label fw-semibold" id="formLblAge">Age</label>
+                            <input type="number" id="age" class="form-control" min="1" max="120" value="30">
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label fw-semibold" id="formLblGender">Gender</label>
+                            <select id="gender" class="form-select">
+                                <option value="male" id="optFormMale">Male</option>
+                                <option value="female" id="optFormFemale">Female</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold" id="formLblMarital">Marital Status</label>
+                        <select id="maritalStatus" class="form-select">
+                            <option value="single" id="optMarSingle">Single / Unmarried</option>
+                            <option value="married" id="optMarMarried">Married</option>
+                            <option value="divorced" id="optMarDivorced">Divorced</option>
+                            <option value="widowed" id="optMarWidowed">Widowed</option>
+                        </select>
+                    </div>
+
+                    <div id="conditionalMaritalFields" style="display:none" class="border p-3 bg-light rounded mb-3">
+                        <h6 class="text-secondary fw-bold mb-2" id="formHeadingSpouse">
+                            Spouse & Marriage Details
+                        </h6>
+
+                        <div class="row mb-2">
+                            <div class="col-md-6">
+                                <label class="form-label small" id="formLblSpouseName">Spouse Name</label>
+                                <input type="text" id="spouseName" class="form-control form-control-sm">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label small" id="formLblSpousePhone">Spouse Phone</label>
+                                <input type="tel" id="spousePhone" class="form-control form-control-sm">
+                            </div>
+                        </div>
+
+                        <div class="mb-2">
+                            <label class="form-label small" id="formLblSpouseAlive">
+                                Is the Spouse Still Alive?
+                            </label>
+                            <select id="spouseAlive" class="form-select form-select-sm">
+                                <option value="yes" id="optSpouseYes">Yes, Alive</option>
+                                <option value="no" id="optSpouseNo">Deceased</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-2">
+                            <label class="form-label small fw-semibold text-dark" id="formLblChildrenCount">
+                                How many children do you have?
+                            </label>
+                            <input type="number" id="childrenCount" class="form-control form-control-sm" min="0" max="99">
+                        </div>
+
+                        <div id="childrenFormContainer"></div>
+                    </div>
+
+                    <div class="mb-3">
+                        <button type="button"
+                                class="btn btn-sm btn-outline-primary fw-bold"
+                                onclick="toggleExtraPackageFields()"
+                                id="btnToggleExtra">
+                            + Add Extra Program Allowance
+                        </button>
+
+                        <div id="extraFieldsPipelineWrapper"
+                             class="p-3 border rounded bg-light mt-2"
+                             style="display:none">
+                            <div class="row g-2">
+                                <div class="col-6">
+                                    <label class="form-label small fw-bold text-secondary" id="formLblExtraTitle">
+                                        Extra Title
+                                    </label>
+                                    <input type="text" id="extraTitle" class="form-control form-control-sm">
+                                </div>
+                                <div class="col-6">
+                                    <label class="form-label small fw-bold text-secondary" id="formLblExtraAmount">
+                                        Extra Amount ($)
+                                    </label>
+                                    <input type="number" id="extraAmount" class="form-control form-control-sm" min="0" value="0">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold" id="formLblBaseMoney">
+                            Base Family Financial Stipend ($)
+                        </label>
+                        <input type="number" id="baseFamilyMoney" class="form-control" min="0" value="0">
+                    </div>
+
+                    <button type="submit" class="btn btn-success w-100 fw-bold" id="btnSubmitForm">
+                        Save Beneficiary Record
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="modalBoxWrapper"></div>
+
+
+    <!-- ===========================================================
+SEND ASSISTANCE MODAL
+=========================================================== -->
+
+<div class="modal fade"
+id="sendMoneyModal"
+tabindex="-1"
+aria-hidden="true">
+
+<div class="modal-dialog modal-dialog-centered modal-lg">
+
+   <div class="modal-content border-0 shadow-lg send-money-modal">
+
+       <div class="modal-header bg-success text-white">
+
+           <div>
+
+               <h5 class="fw-bold mb-0">
+                   <i class="bi bi-cash-stack me-2"></i>
+                   Send Humanitarian Assistance
+               </h5>
+
+               <small class="opacity-75">
+                   Review beneficiary information before sending.
+               </small>
+
+           </div>
+
+           <button class="btn-close btn-close-white"
+                   data-bs-dismiss="modal"></button>
+
+       </div>
+
+       <div class="modal-body">
+
+           <!-- FAMILY -->
+
+           <div class="payment-family-card">
+            <div class="card mt-3">
+
+                <div class="card-header fw-bold">
+                    Payment Breakdown
+
+                
+                    <button
+
+                    class="btn btn-outline-primary btn-sm"
+
+                    onclick="showExtraPaymentForm()">
+
+                    <i class="bi bi-plus-circle"></i>
+
+                    Add Extra
+
+                    </button>
+                </div>
+
+                <div id="extraPaymentForm"
+
+class="mt-3"
+
+style="display:none">
+
+<input
+
+id="extraPaymentTitle"
+
+class="form-control"
+
+placeholder="Title">
+
+<input
+
+id="extraPaymentAmount"
+
+type="number"
+
+class="form-control mt-2"
+
+placeholder="Amount">
+
+<button
+
+class="btn btn-success mt-2"
+
+onclick="addExtraPayment()">
+
+Add
+
+</button>
+
+</div>
+                
+            
+<div class="card-body">
+
+    <div id="paymentBreakdown"></div>
+
+    <hr>
+
+  
+
+</div>
+            </div>
+
+               <div class="d-flex justify-content-between">
+
+                   <div>
+
+                       <h5 id="paymentFamilyName"
+                           class="fw-bold mb-1">
+                           --
+                       </h5>
+
+                       <div class="text-muted">
+
+                           <i class="bi bi-telephone"></i>
+
+                           <span id="paymentFamilyPhone">
+                               --
+                           </span>
+
+                       </div>
+
+                       <div class="text-muted">
+
+                           <i class="bi bi-geo-alt"></i>
+
+                           <span id="paymentFamilyLocation">
+                               --
+                           </span>
+
+                       </div>
+
+                   </div>
+
+                   <div class="text-end">
+
+                       <span class="badge bg-success fs-6">
+
+                           $
+                           <span id="paymentSuggestedAmount">
+                               0
+                           </span>
+
+                       </span>
+
+                   </div>
+
+               </div>
+
+           </div>
+
+           <!-- LAST TRANSACTION -->
+
+           <div class="last-payment-box mt-3">
+
+               <div class="d-flex justify-content-between align-items-center">
+
+                   <h6 class="fw-bold mb-0">
+
+                       <i class="bi bi-clock-history"></i>
+
+                       Last Transaction
+
+                   </h6>
+
+                   <span class="badge bg-secondary"
+                         id="lastPaymentDate">
+
+                       Never
+
+                   </span>
+
+               </div>
+
+               <hr>
+
+               <div class="row">
+
+                   <div class="col-md-4">
+
+                       <small class="text-muted">
+
+                           Amount
+
+                       </small>
+
+                       <h5 class="text-success"
+                           id="lastPaymentAmount">
+
+                           $0
+
+                       </h5>
+
+                   </div>
+
+                   <div class="col-md-4">
+
+                       <small class="text-muted">
+
+                           Gateway
+
+                       </small>
+
+                       <h6 id="lastPaymentGateway">
+
+                           --
+
+                       </h6>
+
+                   </div>
+
+                   <div class="col-md-4">
+
+                       <small class="text-muted">
+
+                           Reference
+
+                       </small>
+
+                       <h6 id="lastPaymentReference">
+
+                           --
+
+                       </h6>
+
+                   </div>
+
+               </div>
+
+           </div>
+
+ 
+
+           <hr>
+
+           <!-- PAYMENT FORM -->
+
+           <form id="sendMoneyForm">
+
+               <input type="hidden"
+                      id="paymentPersonId">
+
+               <div class="row g-3">
+
+                   <div class="col-md-6">
+
+                       <label class="form-label fw-bold">
+
+                           Payment Gateway
+
+                       </label>
+
+                       <select class="form-select"
+                               id="paymentGateway">
+
+                           <option>EVC Plus</option>
+
+                           <option>eDahab</option>
+
+                           <option>SomNet</option>
+
+                       </select>
+
+                   </div>
+
+                   <div class="col-md-6">
+
+                       <label class="form-label fw-bold">
+
+                           Amount ($)
+
+                       </label>
+
+                       <input
+                           id="paymentAmount"
+                           class="form-control"
+                           type="number"
+                           min="1">
+
+                   </div>
+
+               </div>
+
+               <div class="mt-3">
+
+                   <label class="form-label fw-bold">
+
+                       Reference Number
+
+                   </label>
+
+                   <input
+                       id="paymentReference"
+                       class="form-control"
+                       placeholder="Auto or Manual">
+
+               </div>
+
+               <div class="mt-3">
+
+                   <label class="form-label fw-bold">
+
+                       Notes
+
+                   </label>
+
+                   <textarea
+                       id="paymentNotes"
+                       rows="3"
+                       class="form-control"
+                       placeholder="Optional notes"></textarea>
+
+               </div>
+
+               <hr>
+
+            <div class="card border-primary">
+
+                <div class="card-header bg-primary text-white fw-bold">
+
+                    <i class="bi bi-phone-fill me-2"></i>
+
+                    USSD Preview
+
+                </div>
+
+                <div class="card-body">
+
+                    <div class="row">
+
+                        <div class="col-md-4">
+
+                            <small class="text-muted">
+
+                                Gateway
+
+                            </small>
+
+                            <div
+                                id="previewGateway"
+                                class="fw-bold">
+
+                                EVC Plus
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-4">
+
+                            <small class="text-muted">
+
+                                Phone
+
+                            </small>
+
+                            <div
+                                id="previewPhone"
+                                class="fw-bold">
+
+                                --
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-4">
+
+                            <small class="text-muted">
+
+                                Amount
+
+                            </small>
+
+                            <div
+                                id="previewAmount"
+                                class="text-success fw-bold">
+
+                                $0.00
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <hr>
+
+                    <div>
+
+                        <small class="text-muted">
+
+                            USSD Code
+
+                        </small>
+
+                        <div
+                            id="previewCode"
+                            class="font-monospace fs-5 fw-bold text-primary">
+
+                            --
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+           </form>
+
+                     <!-- PAYMENT HISTORY -->
+
+
+
+           <hr>
+
+           <div class="card border-secondary mb-3">
+           
+               <div class="card-header bg-secondary text-white fw-bold">
+           
+                   <i class="bi bi-clock-history me-2"></i>
+           
+                   Recent Payment History
+           
+               </div>
+           
+               <div
+                   id="paymentHistoryTimeline"
+                   class="card-body">
+           
+                   <div class="text-muted">
+           
+                       No payment history.
+           
+                   </div>
+           
+               </div>
+           
+           </div>
+           
+
+       </div>
+
+       <div class="modal-footer">
+
+           <button
+               class="btn btn-light"
+               data-bs-dismiss="modal">
+
+               Cancel
+
+           </button>
+
+           <button
+
+class="btn btn-primary"
+
+onclick="dialPayment()">
+
+<i class="bi bi-telephone-fill"></i>
+
+Dial Payment
+
+</button>
+           <button
+               class="btn btn-success px-4"
+               id="btnConfirmSend">
+
+               <span id="sendBtnText">
+
+                   <i class="bi bi-send-fill me-1"></i>
+
+                   Send Assistance
+
+               </span>
+
+           </button>
+
+       </div>
+
+   </div>
+
+</div>
+
+</div>
+
+<!-- ===========================================================
+ALREADY PAID WARNING
+=========================================================== -->
+
+<div class="modal fade"
+     id="alreadyPaidModal"
+     tabindex="-1">
+
+    <div class="modal-dialog modal-dialog-centered">
+
+        <div class="modal-content border-0 shadow-lg">
+
+            <div class="modal-header bg-warning">
+
+                <h5 class="fw-bold mb-0">
+
+                    <i class="bi bi-exclamation-triangle-fill me-2"></i>
+
+                    Payment Already Exists
+
+                </h5>
+
+            </div>
+
+            <div class="modal-body">
+
+                <div class="alert alert-warning">
+
+                    This family already received assistance during this month.
+
+                </div>
+
+                <table class="table table-sm">
+
+                    <tr>
+
+                        <th>Family</th>
+
+                        <td id="dupFamilyName"></td>
+
+                    </tr>
+
+                    <tr>
+
+                        <th>Phone</th>
+
+                        <td id="dupFamilyPhone"></td>
+
+                    </tr>
+
+                    <tr>
+
+                        <th>Last Payment</th>
+
+                        <td id="dupPaymentDate"></td>
+
+                    </tr>
+
+                    <tr>
+
+                        <th>Last Amount</th>
+
+                        <td id="dupPaymentAmount"></td>
+
+                    </tr>
+
+                    <tr>
+
+                        <th>Total This Month</th>
+
+                        <td id="dupTotalMonth"></td>
+
+                    </tr>
+
+                </table>
+
+            </div>
+
+            <div class="modal-footer">
+
+                <button
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal">
+
+                    Cancel
+
+                </button>
+
+                <button
+                    class="btn btn-warning"
+                    id="btnContinuePayment">
+
+                    Continue Anyway
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ===========================================================
+PAYMENT SUCCESS RECEIPT
+=========================================================== -->
+
+<div class="modal fade"
+     id="paymentReceiptModal"
+     tabindex="-1">
+
+    <div class="modal-dialog modal-dialog-centered">
+
+        <div class="modal-content border-0 shadow-lg">
+
+            <div class="modal-header bg-success text-white">
+
+                <h5 class="fw-bold">
+
+                    <i class="bi bi-check-circle-fill me-2"></i>
+
+                    Payment Successful
+
+                </h5>
+
+            </div>
+
+            <div class="modal-body">
+
+                <table class="table table-bordered">
+
+                    <tr>
+                        <th>Reference</th>
+                        <td id="receiptReference"></td>
+                    </tr>
+
+                    <tr>
+                        <th>Family</th>
+                        <td id="receiptFamily"></td>
+                    </tr>
+
+                    <tr>
+                        <th>Phone</th>
+                        <td id="receiptPhone"></td>
+                    </tr>
+
+                    <tr>
+                        <th>Gateway</th>
+                        <td id="receiptGateway"></td>
+                    </tr>
+
+                    <tr>
+                        <th>Amount</th>
+                        <td id="receiptAmount"></td>
+                    </tr>
+
+                    <tr>
+                        <th>Date</th>
+                        <td id="receiptDate"></td>
+                    </tr>
+
+                    <tr>
+                        <th>Notes</th>
+                        <td id="receiptNotes"></td>
+                    </tr>
+
+                </table>
+
+            </div>
+
+            <div class="modal-footer">
+
+                <button
+                    class="btn btn-success"
+                    data-bs-dismiss="modal">
+
+                    Close
+
+                </button>
+
+                
+    <button
+    class="btn btn-primary"
+    onclick="printPaymentReceipt()">
+
+    <i class="bi bi-printer-fill me-1"></i>
+
+    Print Receipt
+
+</button>
+
+<button
+class="btn btn-danger"
+onclick="downloadReceiptPDF()">
+
+<i class="bi bi-file-earmark-pdf-fill me-1"></i>
+
+PDF
+
+</button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<!-- ===========================================================
+GLOBAL TOAST
+=========================================================== -->
+
+<div
+    id="toastContainer"
+    class="toast-container position-fixed top-0 end-0 p-3"
+    style="z-index:99999;">
+
+</div>
+    <!-- NAVBAR -->
+    <div id="navbarContainer"></div>
+
+    <!-- SCRIPTS (ORDER MATTERS) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <script src="data/regions.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/paymentEngine.js"></script>
+    <script src="js/people.js"></script>
+
+    <script src="js/navbar.js"></script>
+    <script src="js/header.js"></script>
+
+</body>
+</html>

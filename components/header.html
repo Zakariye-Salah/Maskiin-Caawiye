@@ -1,0 +1,369 @@
+<!-- =========================================================
+    MASKIIN CAAWIYE
+    PREMIUM HEADER v2.0
+========================================================= -->
+
+<header class="mc-header shadow-sm">
+
+    <!-- LEFT -->
+    <div class="mc-header-left">
+
+        <a href="dashboard.html" class="mc-brand">
+
+            <div class="mc-logo">
+                <i class="bi bi-heart-pulse-fill"></i>
+            </div>
+
+            <div class="mc-brand-info">
+
+                <h5 class="mc-app-title">
+                    Maskiin Caawiye
+                </h5>
+
+                <small
+                    class="mc-app-subtitle"
+                    id="headerSubtitle">
+
+                    Humanitarian Donation Management
+
+                </small>
+
+            </div>
+
+        </a>
+
+    </div>
+
+    <!-- CENTER -->
+
+    <div class="mc-header-center">
+
+        <div class="mc-date-card">
+
+            <i class="bi bi-calendar3"></i>
+
+            <span id="headerDate">
+                Loading...
+            </span>
+
+        </div>
+
+    </div>
+
+    <!-- RIGHT -->
+
+    <div class="mc-header-right">
+
+        <!-- ===========================
+             NOTIFICATIONS
+        ============================ -->
+
+        <button
+            class="mc-icon-btn"
+            id="notificationBtn"
+            onclick="openNotifications()">
+
+            <i class="bi bi-bell-fill"></i>
+
+            <span
+                class="mc-badge pulse"
+                id="notifCount">
+
+                0
+
+            </span>
+
+        </button>
+
+
+        <!-- ===========================
+             LANGUAGE
+        ============================ -->
+
+        <div class="dropdown">
+
+            <button
+                class="mc-icon-btn dropdown-toggle"
+                data-bs-toggle="dropdown">
+
+                <i class="bi bi-translate"></i>
+
+            </button>
+
+            <ul
+                class="dropdown-menu dropdown-menu-end mc-dropdown">
+
+                <li>
+
+                    <button
+                        class="dropdown-item language-item"
+                        id="lang-en"
+                        onclick="setLanguage('en')">
+
+                        <span>
+
+                            🇺🇸 English
+
+                        </span>
+
+                        <i class="bi bi-check2"></i>
+
+                    </button>
+
+                </li>
+
+                <li>
+
+                    <button
+                        class="dropdown-item language-item"
+                        id="lang-so"
+                        onclick="setLanguage('so')">
+
+                        <span>
+
+                            🇸🇴 Soomaali
+
+                        </span>
+
+                        <i class="bi bi-check2"></i>
+
+                    </button>
+
+                </li>
+
+            </ul>
+
+        </div>
+
+
+        <!-- ===========================
+             THEME
+        ============================ -->
+
+        <button
+            class="mc-icon-btn"
+            onclick="toggleTheme()">
+
+            <i
+                id="themeIcon"
+                class="bi bi-moon-stars-fill">
+
+            </i>
+
+        </button>
+
+
+        <!-- ===========================
+             USER
+        ============================ -->
+
+        <div class="dropdown">
+
+            <button
+                class="mc-user-btn dropdown-toggle"
+                data-bs-toggle="dropdown">
+
+                <div
+                    class="mc-avatar"
+                    id="adminAvatar">
+
+                    A
+
+                </div>
+
+                <div class="mc-user-info">
+
+                    <span
+                        class="mc-user-name"
+                        id="adminName">
+
+                        Administrator
+
+                    </span>
+
+                    <small>
+
+                        System Administrator
+
+                    </small>
+
+                </div>
+
+            </button>
+
+            <ul
+                class="dropdown-menu dropdown-menu-end mc-dropdown">
+
+                <li>
+
+                    <h6 class="dropdown-header">
+
+                        Account
+
+                    </h6>
+
+                </li>
+
+                <li>
+
+                    <a
+                        class="dropdown-item"
+                        href="profile.html">
+
+                        <i class="bi bi-person-circle"></i>
+
+                        My Profile
+
+                    </a>
+
+                </li>
+
+                <li>
+
+                    <a
+                        class="dropdown-item"
+                        href="settings.html">
+
+                        <i class="bi bi-gear"></i>
+
+                        Settings
+
+                    </a>
+
+                </li>
+
+                <li>
+
+                    <a
+                        class="dropdown-item"
+                        href="#"
+                        onclick="showBackupReminder()">
+
+                        <i class="bi bi-cloud-arrow-up"></i>
+
+                        Backup Data
+
+                    </a>
+
+                </li>
+
+                <li>
+
+                    <a
+                        class="dropdown-item"
+                        href="#"
+                        onclick="toggleTheme()">
+
+                        <i class="bi bi-moon-stars"></i>
+
+                        Appearance
+
+                    </a>
+
+                </li>
+
+                <li>
+
+                    <hr class="dropdown-divider">
+
+                </li>
+
+                <li>
+
+                    <a
+                        class="dropdown-item text-danger"
+                        href="#"
+                        onclick="logout()">
+
+                        <i class="bi bi-box-arrow-right"></i>
+
+                        Logout
+
+                    </a>
+
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<!-- =========================================================
+    NOTIFICATION MODAL
+========================================================= -->
+
+<div
+    class="modal fade"
+    id="notificationModal"
+    tabindex="-1">
+
+    <div class="modal-dialog modal-dialog-scrollable modal-lg">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <h5>
+
+                    <i class="bi bi-bell-fill me-2"></i>
+
+                    Notifications
+
+                </h5>
+
+                <button
+                    class="btn-close"
+                    data-bs-dismiss="modal">
+
+                </button>
+
+            </div>
+
+            <div
+                class="modal-body"
+                id="notificationList">
+
+            </div>
+
+            <div class="modal-footer">
+
+                <button
+                    class="btn btn-outline-success"
+                    onclick="markAllNotificationsRead()">
+
+                    <i class="bi bi-check2-all"></i>
+
+                    Mark All Read
+
+                </button>
+
+                <button
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal">
+
+                    Close
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+    GLOBAL TOAST
+========================================================= -->
+
+<div
+    class="toast-container position-fixed bottom-0 end-0 p-3"
+    id="toastContainer">
+
+</div>

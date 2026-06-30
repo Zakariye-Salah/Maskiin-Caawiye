@@ -1,0 +1,68 @@
+/* Maskiin Caawiye - Settings & System Control Stylesheet */
+
+.settings-card {
+  background: var(--bs-card-bg, #ffffff);
+  border-radius: 14px;
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.02);
+  border: 1px solid var(--bs-border-color-translucent);
+  transition: background-color 0.25s ease, border-color 0.25s ease;
+}
+
+/* Unified Dark Mode via Bootstrap 5 attribute */
+[data-bs-theme="dark"] {
+  background-color: #121212;
+}
+
+[data-bs-theme="dark"] .settings-card {
+  background: #1e1e1e;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  border-color: #2d2d2d;
+}
+
+/* Input Fields styling matching Bootstrap 5 themes */
+[data-bs-theme="dark"] .form-control,
+[data-bs-theme="dark"] .form-select {
+  background-color: #252525 !important;
+  color: #ffffff !important;
+  border-color: #383838 !important;
+}
+
+[data-bs-theme="dark"] .form-control:focus,
+[data-bs-theme="dark"] .form-select:focus {
+  border-color: var(--bs-primary);
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+/* Badges and Interactive Elements */
+.trash-badge-tx { 
+  background-color: rgba(75, 35, 211, 0.12); 
+  color: #4b23d3; 
+  font-weight: 600;
+}
+[data-bs-theme="dark"] .trash-badge-tx { 
+  background-color: rgba(210, 196, 255, 0.15); 
+  color: #d2c4ff; 
+}
+
+.trash-badge-ppl { 
+  background-color: rgba(211, 75, 35, 0.12); 
+  color: #d34b23; 
+  font-weight: 600;
+}
+[data-bs-theme="dark"] .trash-badge-ppl { 
+  background-color: rgba(255, 202, 227, 0.15); 
+  color: #ffcae3; 
+}
+
+/* Structural Layout Resiliency */
+body {
+  padding-bottom: 85px !important;
+}
+
+.bottom-nav {
+  z-index: 1040;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.06) !important;
+  background-color: var(--bs-body-bg);
+}

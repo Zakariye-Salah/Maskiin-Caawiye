@@ -1,0 +1,1729 @@
+/*=========================================================
+    MASKIIN CAAWIYE
+    PREMIUM HEADER
+=========================================================*/
+
+:root{
+
+  --mc-header-height:72px;
+
+  --mc-radius:16px;
+
+  --mc-radius-sm:12px;
+
+  --mc-transition:.28s ease;
+
+}
+
+/*=========================================================
+HEADER
+=========================================================*/
+
+.mc-header{
+
+  position:sticky;
+
+  top:0;
+
+  z-index:1040;
+
+  height:var(--mc-header-height);
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  gap:18px;
+
+  padding:0 22px;
+
+  background:rgba(255,255,255,.95);
+
+  backdrop-filter:blur(18px);
+
+  -webkit-backdrop-filter:blur(18px);
+
+  border-bottom:1px solid rgba(229,231,235,.9);
+
+  transition:var(--mc-transition);
+
+}
+
+/*=========================================================
+DARK MODE
+=========================================================*/
+
+html[data-bs-theme="dark"] .mc-header{
+
+  background:rgba(17,24,39,.95);
+
+  border-bottom:1px solid rgba(55,65,81,.8);
+
+}
+
+/*=========================================================
+LEFT
+=========================================================*/
+
+.mc-header-left{
+
+  display:flex;
+
+  align-items:center;
+
+  min-width:260px;
+
+}
+
+.mc-brand{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:14px;
+
+  text-decoration:none;
+
+  color:inherit;
+
+}
+
+/*=========================================================
+LOGO
+=========================================================*/
+
+.mc-logo{
+
+  width:46px;
+
+  height:46px;
+
+  border-radius:16px;
+
+  display:flex;
+
+  justify-content:center;
+
+  align-items:center;
+
+  background:linear-gradient(135deg,#10B981,#059669);
+
+  color:#fff;
+
+  font-size:21px;
+
+  box-shadow:
+
+      0 10px 25px rgba(16,185,129,.35);
+
+  transition:.30s;
+
+}
+
+.mc-brand:hover .mc-logo{
+
+  transform:rotate(-8deg) scale(1.06);
+
+}
+
+/*=========================================================
+BRAND
+=========================================================*/
+
+.mc-brand-info{
+
+  display:flex;
+
+  flex-direction:column;
+
+}
+
+.mc-app-title{
+
+  margin:0;
+
+  font-size:1.1rem;
+
+  font-weight:700;
+
+  color:#111827;
+
+}
+
+.mc-app-subtitle{
+
+  color:#6B7280;
+
+  font-size:.78rem;
+
+}
+
+html[data-bs-theme="dark"] .mc-app-title{
+
+  color:#fff;
+
+}
+
+html[data-bs-theme="dark"] .mc-app-subtitle{
+
+  color:#9CA3AF;
+
+}
+
+/*=========================================================
+CENTER
+=========================================================*/
+
+.mc-header-center{
+
+  flex:1;
+
+  display:flex;
+
+  justify-content:center;
+
+}
+
+.mc-date-card{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:10px;
+
+  padding:10px 18px;
+
+  border-radius:15px;
+
+  background:#F9FAFB;
+
+  border:1px solid #E5E7EB;
+
+  font-size:.88rem;
+
+  font-weight:600;
+
+  color:#374151;
+
+  transition:.25s;
+
+}
+
+.mc-date-card i{
+
+  color:#10B981;
+
+}
+
+.mc-date-card:hover{
+
+  transform:translateY(-2px);
+
+  box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+}
+
+html[data-bs-theme="dark"] .mc-date-card{
+
+  background:#1F2937;
+
+  border-color:#374151;
+
+  color:#F3F4F6;
+
+}
+
+/*=========================================================
+RIGHT
+=========================================================*/
+
+.mc-header-right{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:10px;
+
+}
+
+/*=========================================================
+ICON BUTTONS
+=========================================================*/
+
+.mc-icon-btn{
+
+  position:relative;
+
+  width:46px;
+
+  height:46px;
+
+  border:none;
+
+  border-radius:15px;
+
+  background:#F9FAFB;
+
+  color:#4B5563;
+
+  display:flex;
+
+  justify-content:center;
+
+  align-items:center;
+
+  transition:.25s;
+
+  cursor:pointer;
+
+}
+
+.mc-icon-btn i{
+
+  font-size:19px;
+
+}
+
+.mc-icon-btn:hover{
+
+  background:#ECFDF5;
+
+  color:#059669;
+
+  transform:translateY(-2px);
+
+  box-shadow:
+
+      0 8px 20px rgba(16,185,129,.15);
+
+}
+
+.mc-icon-btn:active{
+
+  transform:scale(.95);
+
+}
+
+html[data-bs-theme="dark"] .mc-icon-btn{
+
+  background:#1F2937;
+
+  color:#D1D5DB;
+
+}
+
+html[data-bs-theme="dark"] .mc-icon-btn:hover{
+
+  background:#065F46;
+
+  color:#fff;
+
+}
+
+/*=========================================================
+NOTIFICATION BADGE
+=========================================================*/
+
+.mc-badge{
+
+  position:absolute;
+
+  top:-4px;
+
+  right:-4px;
+
+  min-width:20px;
+
+  height:20px;
+
+  padding:0 5px;
+
+  border-radius:50px;
+
+  background:#EF4444;
+
+  color:#fff;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  font-size:11px;
+
+  font-weight:700;
+
+  border:2px solid #fff;
+
+}
+
+html[data-bs-theme="dark"] .mc-badge{
+
+  border-color:#111827;
+
+}
+
+.mc-badge.pulse{
+
+  animation:mcPulse 1.5s infinite;
+
+}
+
+@keyframes mcPulse{
+
+0%{
+
+transform:scale(1);
+
+}
+
+50%{
+
+transform:scale(1.25);
+
+}
+
+100%{
+
+transform:scale(1);
+
+}
+
+}
+
+/*=========================================================
+USER BUTTON
+=========================================================*/
+
+.mc-user-btn{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:12px;
+
+  padding:6px 14px 6px 6px;
+
+  border:none;
+
+  border-radius:16px;
+
+  background:#F9FAFB;
+
+  transition:.25s;
+
+  cursor:pointer;
+
+}
+
+.mc-user-btn:hover{
+
+  background:#ECFDF5;
+
+  box-shadow:
+
+      0 10px 22px rgba(16,185,129,.12);
+
+}
+
+html[data-bs-theme="dark"] .mc-user-btn{
+
+  background:#1F2937;
+
+}
+
+html[data-bs-theme="dark"] .mc-user-btn:hover{
+
+  background:#065F46;
+
+}
+
+/*=========================================================
+AVATAR
+=========================================================*/
+
+.mc-avatar{
+
+  width:44px;
+
+  height:44px;
+
+  border-radius:50%;
+
+  background:linear-gradient(135deg,#10B981,#059669);
+
+  display:flex;
+
+  justify-content:center;
+
+  align-items:center;
+
+  color:#fff;
+
+  font-weight:700;
+
+  font-size:16px;
+
+  box-shadow:
+
+      0 8px 18px rgba(16,185,129,.35);
+
+}
+
+/*=========================================================
+USER INFO
+=========================================================*/
+
+.mc-user-info{
+
+  display:flex;
+
+  flex-direction:column;
+
+  align-items:flex-start;
+
+  line-height:1.2;
+
+}
+
+.mc-user-name{
+
+  font-weight:700;
+
+  font-size:.92rem;
+
+  color:#111827;
+
+}
+
+.mc-user-info small{
+
+  color:#6B7280;
+
+  font-size:.73rem;
+
+}
+
+html[data-bs-theme="dark"] .mc-user-name{
+
+  color:#fff;
+
+}
+
+html[data-bs-theme="dark"] .mc-user-info small{
+
+  color:#9CA3AF;
+
+}
+
+/*=========================================================
+RESPONSIVE
+=========================================================*/
+
+@media(max-width:992px){
+
+.mc-header{
+
+padding:0 16px;
+
+}
+
+.mc-app-subtitle{
+
+display:none;
+
+}
+
+}
+
+@media(max-width:768px){
+
+.mc-header{
+
+height:64px;
+
+}
+
+.mc-header-center{
+
+display:none;
+
+}
+
+.mc-user-info{
+
+display:none;
+
+}
+
+.mc-header{
+
+padding:0 10px;
+
+}
+
+.mc-logo{
+
+width:40px;
+
+height:40px;
+
+}
+
+.mc-icon-btn{
+
+width:42px;
+
+height:42px;
+
+}
+
+.mc-user-btn{
+
+padding:4px;
+
+}
+
+}
+
+@media(max-width:480px){
+
+.mc-header{
+
+gap:8px;
+
+}
+
+.mc-header-left{
+
+min-width:auto;
+
+}
+
+.mc-app-title{
+
+font-size:.95rem;
+
+}
+
+.mc-icon-btn{
+
+width:38px;
+
+height:38px;
+
+border-radius:12px;
+
+}
+
+.mc-avatar{
+
+width:38px;
+
+height:38px;
+
+}
+
+}
+
+
+/*=========================================================
+    PART 2B
+    DROPDOWNS • LANGUAGE • MODAL • TOAST
+=========================================================*/
+
+/*=========================================================
+DROPDOWN MENU
+=========================================================*/
+
+.mc-dropdown{
+
+  min-width:260px;
+
+  margin-top:12px;
+
+  border:none;
+
+  border-radius:18px;
+
+  padding:10px;
+
+  background:#FFFFFF;
+
+  box-shadow:
+      0 20px 45px rgba(15,23,42,.12);
+
+  animation:dropdownFade .22s ease;
+
+  overflow:hidden;
+
+}
+
+@keyframes dropdownFade{
+
+  from{
+
+      opacity:0;
+
+      transform:translateY(-10px) scale(.97);
+
+  }
+
+  to{
+
+      opacity:1;
+
+      transform:translateY(0) scale(1);
+
+  }
+
+}
+
+html[data-bs-theme="dark"] .mc-dropdown{
+
+  background:#1F2937;
+
+  box-shadow:
+      0 20px 45px rgba(0,0,0,.45);
+
+}
+
+/*=========================================================
+DROPDOWN HEADER
+=========================================================*/
+
+.dropdown-header{
+
+  font-size:.72rem;
+
+  font-weight:700;
+
+  letter-spacing:.08em;
+
+  text-transform:uppercase;
+
+  color:#9CA3AF;
+
+  padding:10px 14px;
+
+}
+
+html[data-bs-theme="dark"] .dropdown-header{
+
+  color:#6B7280;
+
+}
+
+/*=========================================================
+DROPDOWN ITEM
+=========================================================*/
+
+.mc-dropdown .dropdown-item{
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  gap:12px;
+
+  border-radius:12px;
+
+  padding:11px 14px;
+
+  font-weight:600;
+
+  transition:.22s;
+
+  cursor:pointer;
+
+}
+
+.mc-dropdown .dropdown-item i:first-child{
+
+  margin-right:10px;
+
+}
+
+.mc-dropdown .dropdown-item:hover{
+
+  background:#ECFDF5;
+
+  color:#059669;
+
+  transform:translateX(4px);
+
+}
+
+html[data-bs-theme="dark"] .mc-dropdown .dropdown-item{
+
+  color:#E5E7EB;
+
+}
+
+html[data-bs-theme="dark"] .mc-dropdown .dropdown-item:hover{
+
+  background:#065F46;
+
+  color:#FFFFFF;
+
+}
+
+/*=========================================================
+DIVIDER
+=========================================================*/
+
+.dropdown-divider{
+
+  margin:8px 0;
+
+  border-color:#E5E7EB;
+
+}
+
+html[data-bs-theme="dark"] .dropdown-divider{
+
+  border-color:#374151;
+
+}
+
+/*=========================================================
+LANGUAGE ITEMS
+=========================================================*/
+
+.language-item{
+
+  position:relative;
+
+}
+
+.language-item .bi-check2{
+
+  opacity:0;
+
+  transition:.25s;
+
+}
+
+/* Active Language */
+
+.language-item.active{
+
+  background:#10B981 !important;
+
+  color:#FFFFFF !important;
+
+}
+
+.language-item.active .bi-check2{
+
+  opacity:1;
+
+}
+
+.language-item.active:hover{
+
+  background:#059669 !important;
+
+}
+
+/*=========================================================
+NOTIFICATION MODAL
+=========================================================*/
+
+.modal-content{
+
+  border:none;
+
+  border-radius:22px;
+
+  overflow:hidden;
+
+  box-shadow:
+      0 25px 60px rgba(15,23,42,.20);
+
+}
+
+html[data-bs-theme="dark"] .modal-content{
+
+  background:#1F2937;
+
+  color:#F9FAFB;
+
+}
+
+.modal-header{
+
+  padding:20px 24px;
+
+  border-bottom:1px solid #E5E7EB;
+
+}
+
+.modal-footer{
+
+  border-top:1px solid #E5E7EB;
+
+  padding:18px 24px;
+
+}
+
+html[data-bs-theme="dark"] .modal-header,
+html[data-bs-theme="dark"] .modal-footer{
+
+  border-color:#374151;
+
+}
+
+/*=========================================================
+NOTIFICATION LIST
+=========================================================*/
+
+#notificationList{
+
+  max-height:500px;
+
+  overflow-y:auto;
+
+  padding:20px;
+
+}
+
+/*=========================================================
+NOTIFICATION CARD
+=========================================================*/
+
+.mc-notification{
+
+  display:flex;
+
+  gap:15px;
+
+  align-items:flex-start;
+
+  padding:15px;
+
+  border-radius:16px;
+
+  border:1px solid #E5E7EB;
+
+  margin-bottom:14px;
+
+  transition:.25s;
+
+  background:#FFFFFF;
+
+}
+
+.mc-notification:hover{
+
+  transform:translateY(-2px);
+
+  box-shadow:
+      0 12px 25px rgba(15,23,42,.08);
+
+}
+
+html[data-bs-theme="dark"] .mc-notification{
+
+  background:#111827;
+
+  border-color:#374151;
+
+}
+
+.mc-notification-icon{
+
+  width:46px;
+
+  height:46px;
+
+  border-radius:14px;
+
+  display:flex;
+
+  justify-content:center;
+
+  align-items:center;
+
+  font-size:18px;
+
+  color:#FFFFFF;
+
+}
+
+/* Types */
+
+.mc-info{
+
+  background:#3B82F6;
+
+}
+
+.mc-success{
+
+  background:#10B981;
+
+}
+
+.mc-warning{
+
+  background:#F59E0B;
+
+}
+
+.mc-danger{
+
+  background:#EF4444;
+
+}
+
+.mc-notification-body{
+
+  flex:1;
+
+}
+
+.mc-notification-title{
+
+  font-size:.96rem;
+
+  font-weight:700;
+
+  margin-bottom:4px;
+
+}
+
+.mc-notification-message{
+
+  color:#6B7280;
+
+  font-size:.84rem;
+
+  line-height:1.5;
+
+}
+
+html[data-bs-theme="dark"] .mc-notification-message{
+
+  color:#9CA3AF;
+
+}
+
+.mc-notification-time{
+
+  font-size:.74rem;
+
+  color:#9CA3AF;
+
+  margin-top:8px;
+
+}
+
+/*=========================================================
+TOAST
+=========================================================*/
+
+.toast{
+
+  border:none;
+
+  border-radius:16px;
+
+  overflow:hidden;
+
+  min-width:320px;
+
+  box-shadow:
+      0 18px 40px rgba(15,23,42,.15);
+
+  animation:toastIn .35s ease;
+
+}
+
+html[data-bs-theme="dark"] .toast{
+
+  background:#1F2937;
+
+  color:#F9FAFB;
+
+}
+
+.toast-header{
+
+  border:none;
+
+  padding:12px 16px;
+
+  font-weight:700;
+
+}
+
+.toast-body{
+
+  padding:14px 16px;
+
+  font-size:.92rem;
+
+}
+
+@keyframes toastIn{
+
+  from{
+
+      opacity:0;
+
+      transform:translateX(50px);
+
+  }
+
+  to{
+
+      opacity:1;
+
+      transform:translateX(0);
+
+  }
+
+}
+
+/*=========================================================
+CUSTOM SCROLLBAR
+=========================================================*/
+
+#notificationList::-webkit-scrollbar{
+
+  width:8px;
+
+}
+
+#notificationList::-webkit-scrollbar-thumb{
+
+  background:#10B981;
+
+  border-radius:50px;
+
+}
+
+#notificationList::-webkit-scrollbar-track{
+
+  background:transparent;
+
+}
+
+/*=========================================================
+MOBILE
+=========================================================*/
+
+@media(max-width:768px){
+
+  .mc-dropdown{
+
+      min-width:220px;
+
+  }
+
+  .toast{
+
+      min-width:100%;
+
+  }
+
+  .toast-container{
+
+      left:12px !important;
+
+      right:12px !important;
+
+      bottom:12px !important;
+
+  }
+
+  .modal-dialog{
+
+      margin:12px;
+
+  }
+
+}/*=========================================================
+    PART 2C
+    PREMIUM EFFECTS • ANIMATIONS • ACCESSIBILITY
+=========================================================*/
+
+/*=========================================================
+GLOBAL TRANSITIONS
+=========================================================*/
+
+.mc-header,
+.mc-icon-btn,
+.mc-user-btn,
+.mc-avatar,
+.mc-logo,
+.mc-date-card,
+.mc-dropdown,
+.dropdown-item,
+.modal-content,
+.toast,
+.mc-notification{
+
+    transition:
+        background-color .28s ease,
+        color .28s ease,
+        border-color .28s ease,
+        box-shadow .28s ease,
+        transform .28s ease,
+        opacity .28s ease;
+
+}
+
+/*=========================================================
+HEADER SHINE
+=========================================================*/
+
+.mc-header::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+
+    right:0;
+
+    top:0;
+
+    height:1px;
+
+    background:linear-gradient(
+        90deg,
+        transparent,
+        rgba(16,185,129,.45),
+        transparent
+    );
+
+    pointer-events:none;
+
+}
+
+/*=========================================================
+BUTTON RIPPLE
+=========================================================*/
+
+.mc-icon-btn,
+.mc-user-btn{
+
+    overflow:hidden;
+
+}
+
+.mc-icon-btn::before,
+.mc-user-btn::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:0;
+
+    height:0;
+
+    left:50%;
+
+    top:50%;
+
+    background:rgba(16,185,129,.15);
+
+    border-radius:50%;
+
+    transform:translate(-50%,-50%);
+
+    transition:.45s;
+
+}
+
+.mc-icon-btn:hover::before,
+.mc-user-btn:hover::before{
+
+    width:180px;
+
+    height:180px;
+
+}
+
+/*=========================================================
+ICON ROTATION
+=========================================================*/
+
+.mc-icon-btn:hover i{
+
+    transform:scale(1.12);
+
+}
+
+#themeIcon{
+
+    transition:.45s;
+
+}
+
+.theme-rotate{
+
+    transform:rotate(180deg);
+
+}
+
+/*=========================================================
+NOTIFICATION BELL
+=========================================================*/
+
+.mc-bell-ring{
+
+    animation:bellRing 1.6s infinite;
+
+    transform-origin:top center;
+
+}
+
+@keyframes bellRing{
+
+0%,100%{
+
+transform:rotate(0deg);
+
+}
+
+10%{
+
+transform:rotate(18deg);
+
+}
+
+20%{
+
+transform:rotate(-16deg);
+
+}
+
+30%{
+
+transform:rotate(12deg);
+
+}
+
+40%{
+
+transform:rotate(-8deg);
+
+}
+
+50%{
+
+transform:rotate(4deg);
+
+}
+
+}
+
+/*=========================================================
+LOGO FLOAT
+=========================================================*/
+
+.mc-logo{
+
+    animation:logoFloat 5s ease-in-out infinite;
+
+}
+
+@keyframes logoFloat{
+
+0%,100%{
+
+transform:translateY(0);
+
+}
+
+50%{
+
+transform:translateY(-4px);
+
+}
+
+}
+
+/*=========================================================
+AVATAR GLOW
+=========================================================*/
+
+.mc-avatar{
+
+    position:relative;
+
+}
+
+.mc-avatar::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:-3px;
+
+    border-radius:50%;
+
+    border:2px solid rgba(16,185,129,.25);
+
+    animation:avatarGlow 2.5s infinite;
+
+}
+
+@keyframes avatarGlow{
+
+0%{
+
+transform:scale(1);
+
+opacity:.6;
+
+}
+
+100%{
+
+transform:scale(1.18);
+
+opacity:0;
+
+}
+
+}
+
+/*=========================================================
+ACTIVE PAGE SHADOW
+=========================================================*/
+
+.mc-header{
+
+    box-shadow:
+
+        0 4px 18px rgba(15,23,42,.05);
+
+}
+
+html[data-bs-theme="dark"] .mc-header{
+
+    box-shadow:
+
+        0 8px 24px rgba(0,0,0,.35);
+
+}
+
+/*=========================================================
+FOCUS STATES
+=========================================================*/
+
+.mc-icon-btn:focus-visible,
+.mc-user-btn:focus-visible,
+.dropdown-item:focus-visible{
+
+    outline:none;
+
+    box-shadow:
+
+        0 0 0 3px rgba(16,185,129,.35);
+
+}
+
+/*=========================================================
+ACTIVE ICON
+=========================================================*/
+
+.mc-icon-btn.active{
+
+    background:#10B981;
+
+    color:#fff;
+
+}
+
+html[data-bs-theme="dark"] .mc-icon-btn.active{
+
+    background:#10B981;
+
+}
+
+/*=========================================================
+LOADING SKELETON
+=========================================================*/
+
+.loading-placeholder{
+
+    position:relative;
+
+    overflow:hidden;
+
+    background:#F3F4F6;
+
+}
+
+.loading-placeholder::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+
+    linear-gradient(
+
+    90deg,
+
+    transparent,
+
+    rgba(255,255,255,.6),
+
+    transparent);
+
+    animation:skeleton 1.2s infinite;
+
+}
+
+@keyframes skeleton{
+
+0%{
+
+transform:translateX(-100%);
+
+}
+
+100%{
+
+transform:translateX(100%);
+
+}
+
+}
+
+/*=========================================================
+SMOOTH MODAL
+=========================================================*/
+
+.modal.fade .modal-dialog{
+
+    transform:translateY(-20px) scale(.96);
+
+    transition:.25s;
+
+}
+
+.modal.show .modal-dialog{
+
+    transform:translateY(0) scale(1);
+
+}
+
+/*=========================================================
+TOAST COLORS
+=========================================================*/
+
+.toast-success{
+
+    border-left:5px solid #10B981;
+
+}
+
+.toast-warning{
+
+    border-left:5px solid #F59E0B;
+
+}
+
+.toast-danger{
+
+    border-left:5px solid #EF4444;
+
+}
+
+.toast-info{
+
+    border-left:5px solid #3B82F6;
+
+}
+
+/*=========================================================
+ONLINE STATUS
+=========================================================*/
+
+.mc-avatar-status{
+
+    position:absolute;
+
+    width:12px;
+
+    height:12px;
+
+    border-radius:50%;
+
+    background:#22C55E;
+
+    bottom:2px;
+
+    right:2px;
+
+    border:2px solid #fff;
+
+}
+
+html[data-bs-theme="dark"] .mc-avatar-status{
+
+    border-color:#1F2937;
+
+}
+
+/*=========================================================
+HIDE DROPDOWN ARROW
+=========================================================*/
+
+.dropdown-toggle::after{
+
+    display:none;
+
+}
+
+/*=========================================================
+BACKDROP BLUR
+=========================================================*/
+
+.modal-backdrop.show{
+
+    backdrop-filter:blur(3px);
+
+    -webkit-backdrop-filter:blur(3px);
+
+}
+
+/*=========================================================
+TABLET
+=========================================================*/
+
+@media(max-width:992px){
+
+.mc-brand{
+
+gap:10px;
+
+}
+
+.mc-user-btn{
+
+padding-right:8px;
+
+}
+
+}
+
+/*=========================================================
+PHONE
+=========================================================*/
+
+@media(max-width:576px){
+
+.mc-header{
+
+padding:0 8px;
+
+height:60px;
+
+}
+
+.mc-logo{
+
+width:38px;
+
+height:38px;
+
+font-size:18px;
+
+}
+
+.mc-app-title{
+
+font-size:.9rem;
+
+}
+
+.mc-icon-btn{
+
+width:38px;
+
+height:38px;
+
+}
+
+.mc-avatar{
+
+width:36px;
+
+height:36px;
+
+font-size:14px;
+
+}
+
+.mc-badge{
+
+min-width:18px;
+
+height:18px;
+
+font-size:10px;
+
+}
+
+}
+
+/*=========================================================
+REDUCED MOTION
+=========================================================*/
+
+@media(prefers-reduced-motion:reduce){
+
+*,
+*::before,
+*::after{
+
+animation:none !important;
+
+transition:none !important;
+
+scroll-behavior:auto !important;
+
+}
+
+}
+
+/*=========================================================
+PRINT
+=========================================================*/
+
+@media print{
+
+.mc-header{
+
+display:none !important;
+
+}
+
+}
+
+/*=========================================================
+END OF HEADER CSS
+=========================================================*/

@@ -1,0 +1,1065 @@
+/* Maskiin Caawiye - People Interface Core Stylesheet */
+
+.form-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1050;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease-in-out;
+}
+
+.form-modal-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.form-modal-card {
+  background: #ffffff;
+  width: 100%;
+  max-width: 550px;
+  max-height: 85vh;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transform: scale(0.9);
+  transition: transform 0.25s ease-in-out;
+}
+
+.form-modal-overlay.active .form-modal-card {
+  transform: scale(1);
+}
+
+.form-modal-body {
+  padding: 20px;
+  overflow-y: auto;
+  flex-grow: 1;
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e1 #f8fafc;
+}
+
+.form-modal-body::-webkit-scrollbar { width: 6px; }
+.form-modal-body::-webkit-scrollbar-track { background: #f8fafc; }
+.form-modal-body::-webkit-scrollbar-thumb { background-color: #cbd5e1; border-radius: 3px; }
+
+.form-modal-header {
+  padding: 15px 20px;
+  background-color: #f8fafc;
+  border-bottom: 1px solid #e2e8f0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.close-modal-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  line-height: 1;
+  color: #64748b;
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+.close-modal-btn:hover { color: #ef4444; }
+
+body { padding-bottom: 85px; }
+.bottom-nav { z-index: 1030; box-shadow: 0 -2px 10px rgba(0,0,0,0.05); }
+.table-responsive { border-radius: 8px; overflow: hidden; }
+
+/* Desktop vs Mobile Dynamic Form Engine Framework Views */
+#desktopPeopleWrapper { display: block; }
+#mobilePeopleWrapper { display: none; }
+
+@media (max-width: 991px) {
+  #desktopPeopleWrapper { display: none !important; }
+  #mobilePeopleWrapper { display: flex !important; flex-direction: column; gap: 12px; }
+}
+
+/* Mobile Component Profile Layout Stack Cards */
+.mobile-person-card {
+  background: #ffffff;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+}
+
+.mobile-person-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px dashed #f1f3f5;
+  padding-bottom: 6px;
+}
+.mobile-person-row:last-of-type { border-bottom: none; padding-bottom: 0; }
+
+.font-monospace-custom {
+  font-family: SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.88rem;
+}
+
+/* SYSTEM WIDE DARK MODE ENHANCEMENTS Overrides */
+body.dark-mode {
+  background-color: #121212 !important;
+  color: #e0e0e0 !important;
+}
+body.dark-mode .card,
+body.dark-mode .form-modal-card,
+body.dark-mode .bottom-nav,
+body.dark-mode .mobile-person-card,
+body.dark-mode .modal-content,
+body.dark-mode .family-expanded-details {
+  background-color: #1e1e1e !important;
+  color: #e0e0e0 !important;
+  border-color: #333333 !important;
+}
+body.dark-mode .form-modal-header,
+body.dark-mode .modal-header,
+body.dark-mode .modal-footer {
+  background-color: #181818 !important;
+  border-color: #333333 !important;
+}
+body.dark-mode .table { color: #e0e0e0 !important; }
+body.dark-mode .table-dark { background-color: #111111 !important; }
+body.dark-mode input, body.dark-mode select, body.dark-mode textarea {
+  background-color: #2d2d2d !important;
+  color: #ffffff !important;
+  border-color: #444444 !important;
+}
+body.dark-mode input::placeholder { color: #888888 !important; }
+body.dark-mode .text-dark, body.dark-mode strong, body.dark-mode h5, body.dark-mode h4, body.dark-mode h6, body.dark-mode label { color: #ffffff !important; }
+body.dark-mode .bg-light { background-color: #2a2a2a !important; color: #ffffff !important; }
+
+/* Dynamic Expanded Panel Animation Framework styling */
+.family-expanded-details {
+  background-color: #f8fafc;
+  border-radius: 6px;
+  padding: 15px;
+  border: 1px solid #e2e8f0;
+}
+
+.send-money-modal{
+  max-height:90vh;
+}
+
+.send-money-modal .modal-body{
+  max-height:65vh;
+  overflow-y:auto;
+}
+
+.send-money-modal .modal-footer{
+  position:sticky;
+  bottom:0;
+  background:#fff;
+  z-index:20;
+}
+
+
+
+
+/* ==========================================
+   SEND PAYMENT SCROLLBAR
+========================================== */
+
+.send-money-modal .modal-body{
+  max-height:65vh;
+  overflow-y:auto;
+  padding-bottom:25px;
+
+  scrollbar-width:thin;
+  scrollbar-color:#198754 #ececec;
+}
+
+.send-money-modal .modal-body::-webkit-scrollbar{
+  width:10px;
+}
+
+.send-money-modal .modal-body::-webkit-scrollbar-track{
+  background:#ececec;
+  border-radius:20px;
+}
+
+.send-money-modal .modal-body::-webkit-scrollbar-thumb{
+  background:#198754;
+  border-radius:20px;
+}
+
+body.dark-mode .send-money-modal .modal-body::-webkit-scrollbar-track{
+  background:#232323;
+}
+
+body.dark-mode .send-money-modal .modal-body::-webkit-scrollbar-thumb{
+  background:#30c46f;
+}
+
+/* ==========================================
+   DUPLICATE PAYMENT MODAL
+========================================== */
+
+#alreadyPaidModal .modal-content{
+
+  border-radius:16px;
+  overflow:hidden;
+  
+  }
+  
+  #alreadyPaidModal .modal-header{
+  
+  background:#ffc107;
+  color:#212529;
+  padding:18px 22px;
+  
+  }
+  
+  #alreadyPaidModal .modal-body{
+  
+  padding:22px;
+  
+  }
+  
+  #alreadyPaidModal .alert{
+  
+  border-radius:10px;
+  font-weight:600;
+  margin-bottom:20px;
+  
+  }
+  
+  #alreadyPaidModal table{
+  
+  margin-bottom:0;
+  
+  }
+  
+  #alreadyPaidModal th{
+  
+  width:42%;
+  font-weight:600;
+  background:#f8f9fa;
+  
+  }
+  
+  #alreadyPaidModal td{
+  
+  font-weight:500;
+  
+  }
+  
+  #alreadyPaidModal .modal-footer{
+  
+  padding:16px 20px;
+  
+  }
+  
+  body.dark-mode #alreadyPaidModal th{
+  
+  background:#292929;
+  color:white;
+  
+  }
+  
+  body.dark-mode #alreadyPaidModal td{
+  
+  background:#1d1d1d;
+  color:white;
+  
+  }
+
+
+  /* ==========================================
+   PAYMENT BREAKDOWN
+========================================== */
+
+#paymentBreakdown{
+
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  
+  }
+  
+  #paymentBreakdown .form-check{
+  
+  display:flex;
+  align-items:center;
+  gap:10px;
+  
+  padding:8px 0;
+  
+  }
+  
+  #paymentBreakdown label{
+  
+  flex:1;
+  
+  margin-bottom:0;
+  
+  }
+  
+  #paymentBreakdown input[type="checkbox"]{
+  
+  width:18px;
+  height:18px;
+  
+  }
+
+
+  .send-money-modal .modal-footer{
+
+    position:sticky;
+    bottom:0;
+    
+    background:white;
+    
+    border-top:1px solid #dee2e6;
+    
+    }
+    
+    body.dark-mode .send-money-modal .modal-footer{
+    
+    background:#1e1e1e;
+    
+    }
+
+
+    @media(max-width:768px){
+
+      .send-money-modal .modal-body{
+      
+      padding-bottom:120px;
+      
+      }
+      
+      .send-money-modal .modal-footer{
+      
+      margin-bottom:75px;
+      
+      }
+      
+      }
+
+      #extraPaymentForm{
+
+        background:#f8f9fa;
+        
+        padding:15px;
+        
+        border-radius:10px;
+        
+        margin:15px 0;
+        
+        }
+        
+        body.dark-mode #extraPaymentForm{
+        
+        background:#252525;
+        
+        }
+
+        body:not(.dark-mode) .payment-family-card,
+body:not(.dark-mode) .last-payment-box{
+
+background:white;
+border:1px solid #e5e7eb;
+border-radius:12px;
+padding:18px;
+
+}
+
+
+@media(max-width:768px){
+
+  .send-money-modal .modal-footer{
+  
+  display:flex;
+  flex-direction:column;
+  
+  }
+  
+  .send-money-modal .modal-footer .btn{
+  
+  width:100%;
+  
+  }
+  
+  }
+
+  /* ==========================================================
+   FINAL MOBILE & DESKTOP UI FIXES
+   (Append to the END of people.css)
+========================================================== */
+
+
+/* ---------------------------------------------------------
+   SEARCH FILTERS
+--------------------------------------------------------- */
+
+@media (max-width:768px){
+
+  .card .row.g-2{
+  display:flex;
+  flex-wrap:wrap;
+  row-gap:10px;
+  column-gap:0;
+  }
+  
+  .card .row.g-2>.col-md-3:first-child{
+  flex:0 0 68%;
+  max-width:68%;
+  }
+  
+  .card .row.g-2>.col-md-2:first-of-type{
+  flex:0 0 32%;
+  max-width:32%;
+  }
+  
+  .card .row.g-2>.col-md-2:nth-of-type(2),
+  .card .row.g-2>.col-md-2:nth-of-type(3),
+  .card .row.g-2>.col-md-3:last-child{
+  
+  flex:1 1 33%;
+  max-width:33%;
+  
+  }
+  
+  #globalSearch,
+  #filterGender,
+  #filterRegion,
+  #filterDistrict,
+  #sortOrder{
+  
+  height:46px;
+  font-size:.88rem;
+  
+  }
+  
+  }
+  
+  
+  
+  /* ---------------------------------------------------------
+     PAYMENT FOOTER
+  --------------------------------------------------------- */
+  
+  .send-money-modal .modal-footer{
+  
+  display:flex;
+  justify-content:flex-end;
+  align-items:center;
+  gap:10px;
+  flex-wrap:nowrap;
+  
+  }
+  
+  
+  /* Desktop */
+  
+  @media(min-width:769px){
+  
+  .send-money-modal .modal-footer{
+  
+  position:sticky;
+  bottom:75px;
+  z-index:1055;
+  
+  }
+  
+  .send-money-modal .modal-footer .btn{
+  
+  min-width:145px;
+  
+  }
+  
+  }
+  
+  
+  
+  /* Mobile */
+  
+  @media(max-width:768px){
+  
+  .send-money-modal .modal-footer{
+  
+  position:sticky;
+  bottom:70px;
+  
+  display:flex;
+  
+  flex-direction:row;
+  
+  flex-wrap:nowrap;
+  
+  gap:8px;
+  
+  padding:12px;
+  
+  }
+  
+  .send-money-modal .modal-footer .btn{
+  
+  flex:1;
+  
+  width:auto;
+  
+  padding:.7rem .35rem;
+  
+  font-size:.82rem;
+  
+  white-space:nowrap;
+  
+  }
+  
+  .send-money-modal .modal-footer i{
+  
+  margin-right:4px;
+  
+  }
+  
+  }
+  
+  
+  
+  /* ---------------------------------------------------------
+     DUPLICATE PAYMENT MODAL BUTTONS
+  --------------------------------------------------------- */
+  
+  #alreadyPaidModal .modal-footer{
+  
+  display:flex;
+  gap:10px;
+  justify-content:flex-end;
+  flex-wrap:nowrap;
+  
+  }
+  
+  #alreadyPaidModal .btn{
+  
+  flex:1;
+  
+  }
+  
+  @media(max-width:768px){
+  
+  #alreadyPaidModal .modal-footer{
+  
+  margin-bottom:70px;
+  
+  }
+  
+  }
+  
+  
+  
+  /* ---------------------------------------------------------
+     PAYMENT RECEIPT BUTTONS
+  --------------------------------------------------------- */
+  
+  #paymentReceiptModal .modal-footer{
+  
+  display:flex;
+  gap:10px;
+  flex-wrap:nowrap;
+  
+  }
+  
+  #paymentReceiptModal .btn{
+  
+  flex:1;
+  
+  }
+  
+  @media(max-width:768px){
+  
+  #paymentReceiptModal .modal-footer{
+  
+  margin-bottom:70px;
+  
+  }
+  
+  }
+  
+  
+  
+  /* ---------------------------------------------------------
+     MOBILE ACTION BUTTONS
+  --------------------------------------------------------- */
+  
+  .mobile-person-card .btn-group,
+  .mobile-person-card .action-buttons,
+  .mobile-person-card .actions{
+  
+  display:flex;
+  gap:6px;
+  flex-wrap:wrap;
+  
+  }
+  
+  .mobile-person-card .btn{
+  
+  flex:1;
+  min-width:95px;
+  
+  }
+  
+  
+  
+  /* ---------------------------------------------------------
+     PAYMENT BREAKDOWN
+  --------------------------------------------------------- */
+  
+  .payment-family-card .card-header{
+  
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+  
+  }
+  
+  #extraPaymentForm input{
+  
+  margin-bottom:10px;
+  
+  }
+  
+  
+  
+  /* ---------------------------------------------------------
+     MOBILE FAMILY INFORMATION
+  --------------------------------------------------------- */
+  
+  @media(max-width:768px){
+  
+  .payment-family-card .d-flex.justify-content-between{
+  
+  display:block !important;
+  
+  }
+  
+  .payment-family-card .text-end{
+  
+  text-align:left !important;
+  
+  margin-top:15px;
+  
+  }
+  
+  }
+  
+  
+  
+  /* ---------------------------------------------------------
+     STICKY NAVBAR SPACING
+  --------------------------------------------------------- */
+  
+  body{
+  
+  padding-bottom:95px;
+  
+  }
+  
+  .send-money-modal .modal-body{
+  
+  padding-bottom:140px;
+  
+  }
+  
+  
+  
+  /* ---------------------------------------------------------
+     LIGHT MODE IMPROVEMENTS
+  --------------------------------------------------------- */
+  
+  body:not(.dark-mode) .modal-content{
+  
+  background:#fff;
+  
+  }
+  
+  body:not(.dark-mode) .card{
+  
+  border:1px solid #e8e8e8;
+  
+  }
+  
+  body:not(.dark-mode) .modal-footer{
+  
+  background:#fff;
+  
+  border-top:1px solid #ececec;
+  
+  }
+  
+  
+  
+  /* ---------------------------------------------------------
+     BUTTONS
+  --------------------------------------------------------- */
+  
+  .btn{
+  
+  border-radius:10px;
+  
+  }
+  
+  .form-control,
+  .form-select{
+  
+  border-radius:10px;
+  
+  }
+  
+  
+  
+  /* ---------------------------------------------------------
+     TABLE
+  --------------------------------------------------------- */
+  
+  .table th{
+  
+  white-space:nowrap;
+  
+  }
+  
+  
+  
+  /* ---------------------------------------------------------
+     PAYMENT HISTORY
+  --------------------------------------------------------- */
+  
+  #paymentHistoryTimeline{
+  
+  max-height:300px;
+  
+  overflow-y:auto;
+  
+  }
+  
+  
+  
+  /* ---------------------------------------------------------
+     SCROLLBAR
+  --------------------------------------------------------- */
+  
+  #paymentHistoryTimeline::-webkit-scrollbar,
+  .send-money-modal .modal-body::-webkit-scrollbar{
+  
+  width:8px;
+  
+  }
+  
+  #paymentHistoryTimeline::-webkit-scrollbar-thumb,
+  .send-money-modal .modal-body::-webkit-scrollbar-thumb{
+  
+  background:#198754;
+  border-radius:10px;
+  
+  }
+
+
+  /* ==========================================================
+   ADD FAMILY MODAL - PROFESSIONAL UI
+   Append to END of people.css
+========================================================== */
+
+/* Bigger modal */
+
+.form-modal-card{
+
+  width:min(900px,95vw);
+
+  max-width:900px;
+
+  max-height:90vh;
+
+  border-radius:18px;
+
+}
+
+
+/* Nice header */
+
+.form-modal-header{
+
+  background:#0d6efd;
+
+  color:#fff;
+
+  padding:18px 24px;
+
+  position:sticky;
+
+  top:0;
+
+  z-index:50;
+
+}
+
+.form-modal-header h5{
+
+  color:#fff !important;
+
+  font-size:1.15rem;
+
+}
+
+.close-modal-btn{
+
+  color:white;
+
+  font-size:30px;
+
+}
+
+.close-modal-btn:hover{
+
+  color:#ffd4d4;
+
+}
+
+
+/* Better body */
+
+.form-modal-body{
+
+  padding:25px;
+
+  background:#f8fafc;
+
+  overflow-y:auto;
+
+  padding-bottom:120px;
+
+}
+
+
+/* Scrollbar */
+
+.form-modal-body::-webkit-scrollbar{
+
+  width:9px;
+
+}
+
+.form-modal-body::-webkit-scrollbar-thumb{
+
+  background:#0d6efd;
+
+  border-radius:20px;
+
+}
+
+.form-modal-body::-webkit-scrollbar-track{
+
+  background:#e9ecef;
+
+}
+
+
+/* Inputs */
+
+.form-modal-body .form-control,
+
+.form-modal-body .form-select{
+
+  min-height:48px;
+
+  border-radius:10px;
+
+  border:1px solid #d8dee5;
+
+  box-shadow:none;
+
+}
+
+.form-modal-body .form-control:focus,
+
+.form-modal-body .form-select:focus{
+
+  border-color:#0d6efd;
+
+  box-shadow:0 0 0 .18rem rgba(13,110,253,.15);
+
+}
+
+
+/* Labels */
+
+.form-modal-body label{
+
+  font-weight:600;
+
+  margin-bottom:6px;
+
+}
+
+
+/* Section boxes */
+
+#conditionalMaritalFields,
+
+#extraFieldsPipelineWrapper{
+
+  border-radius:14px !important;
+
+  padding:18px !important;
+
+  background:white !important;
+
+  border:1px solid #dee2e6 !important;
+
+}
+
+
+/* Save button always visible */
+
+#btnSubmitForm{
+
+  position:sticky;
+
+  bottom:80px;
+
+  z-index:999;
+
+  width:100%;
+
+  min-height:56px;
+
+  font-size:1.05rem;
+
+  border-radius:12px;
+
+  box-shadow:0 10px 30px rgba(25, 135, 84, 0.871);
+
+}
+
+
+/* Desktop */
+
+@media(min-width:769px){
+
+#btnSubmitForm{
+
+bottom:-50px;
+
+}
+
+}
+
+
+/* Mobile */
+
+@media(max-width:768px){
+
+.form-modal-card{
+
+width:100vw;
+
+height:100vh;
+
+max-width:none;
+
+max-height:none;
+
+border-radius:0;
+
+}
+
+.form-modal-header{
+
+padding:16px;
+
+}
+
+.form-modal-body{
+
+padding:18px;
+
+padding-bottom:150px;
+
+}
+
+#btnSubmitForm{
+
+position:sticky;
+
+bottom:72px;
+
+font-size:16px;
+
+min-height:54px;
+
+}
+
+}
+
+
+/* Navbar spacing */
+
+body{
+
+padding-bottom:90px;
+
+}
+
+
+/* Dark mode */
+
+body.dark-mode .form-modal-card{
+
+background:#1b1b1b;
+
+}
+
+body.dark-mode .form-modal-body{
+
+background:#161616;
+
+}
+
+body.dark-mode .form-modal-header{
+
+background:#111827;
+
+}
+
+body.dark-mode #conditionalMaritalFields,
+
+body.dark-mode #extraFieldsPipelineWrapper{
+
+background:#232323 !important;
+
+border-color:#333 !important;
+
+}
+
+body.dark-mode .form-control,
+
+body.dark-mode .form-select{
+
+background:#2a2a2a;
+
+border-color:#444;
+
+color:white;
+
+}
+
+body.dark-mode #btnSubmitForm{
+
+box-shadow:0 10px 25px rgba(25, 135, 84, 0.662);
+
+}

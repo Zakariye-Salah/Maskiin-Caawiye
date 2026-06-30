@@ -1,0 +1,2150 @@
+/*=========================================================
+    MASKIIN CAAWIYE
+    PART 1
+    Global Utilities + Bottom Navigation
+=========================================================*/
+
+/* ==========================
+   APP LAYOUT
+========================== */
+
+body{
+  padding-bottom:95px;
+}
+
+.page-container{
+  width:100%;
+  max-width:1400px;
+  margin:auto;
+  padding:25px;
+}
+
+.section-title{
+  font-size:1.45rem;
+  font-weight:700;
+  color:var(--text);
+}
+
+.section-subtitle{
+  color:var(--text-light);
+  font-size:.95rem;
+}
+
+/* ==========================
+ CARD
+========================== */
+
+.mc-card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow-sm);
+  transition:var(--transition);
+}
+
+.mc-card:hover{
+  transform:translateY(-4px);
+  box-shadow:var(--shadow-md);
+}
+
+/* ==========================
+ SCROLLBAR
+========================== */
+
+::-webkit-scrollbar{
+  width:8px;
+  height:8px;
+}
+
+::-webkit-scrollbar-thumb{
+  background:var(--primary);
+  border-radius:50px;
+}
+
+::-webkit-scrollbar-track{
+  background:transparent;
+}
+/*=========================================================
+    MASKIIN CAAWIYE
+    PREMIUM BOTTOM NAVIGATION
+=========================================================*/
+
+body{
+  padding-bottom:90px;
+}
+
+/*=========================================================
+  NAVBAR
+=========================================================*/
+
+.mc-bottom-nav{
+
+  position:fixed;
+
+  left:0;
+
+  right:0;
+
+  bottom:0;
+
+  height:78px;
+
+  display:flex;
+
+  justify-content:space-evenly;
+
+  align-items:center;
+
+  padding:0 10px;
+
+  z-index:9999;
+
+  background:#FFFFFF;
+
+  border-top:1px solid #E5E7EB;
+
+  box-shadow:
+      0 -4px 25px rgba(0,0,0,.08);
+
+  transition:.35s;
+
+}
+
+/*=========================================================
+  DARK MODE
+=========================================================*/
+
+html[data-bs-theme="dark"] .mc-bottom-nav{
+
+  background:#111827;
+
+  border-top:1px solid #374151;
+
+  box-shadow:
+      0 -8px 30px rgba(0,0,0,.45);
+
+}
+
+/*=========================================================
+  NAV ITEM
+=========================================================*/
+
+.mc-nav-link{
+
+  width:72px;
+
+  display:flex;
+
+  flex-direction:column;
+
+  justify-content:center;
+
+  align-items:center;
+
+  gap:4px;
+
+  text-decoration:none;
+
+  color:#6B7280;
+
+  transition:.30s;
+
+  position:relative;
+
+}
+
+/*=========================================================
+  ICON
+=========================================================*/
+
+.mc-nav-icon{
+
+  width:46px;
+
+  height:46px;
+
+  border-radius:15px;
+
+  display:flex;
+
+  justify-content:center;
+
+  align-items:center;
+
+  transition:.35s;
+
+}
+
+.mc-nav-icon i{
+
+  font-size:22px;
+
+  transition:.35s;
+
+}
+
+/*=========================================================
+  TEXT
+=========================================================*/
+
+.mc-nav-text{
+
+  font-size:.72rem;
+
+  font-weight:600;
+
+  transition:.30s;
+
+}
+
+/*=========================================================
+  HOVER
+=========================================================*/
+
+.mc-nav-link:hover{
+
+  color:var(--primary);
+
+}
+
+.mc-nav-link:hover .mc-nav-icon{
+
+  background:rgba(14,159,110,.08);
+
+}
+
+.mc-nav-link:hover i{
+
+  transform:translateY(-2px);
+
+}
+
+/*=========================================================
+  ACTIVE
+=========================================================*/
+
+.mc-nav-link.active{
+
+  color:var(--primary);
+
+}
+
+.mc-nav-link.active .mc-nav-icon{
+
+  background:#D1FAE5;
+
+  transform:translateY(-8px);
+
+  box-shadow:
+
+      0 8px 18px rgba(14,159,110,.22);
+
+}
+
+.mc-nav-link.active i{
+
+  color:var(--primary);
+
+  transform:scale(1.12);
+
+}
+
+.mc-nav-link.active .mc-nav-text{
+
+  font-weight:700;
+
+}
+
+/*=========================================================
+  DARK ACTIVE
+=========================================================*/
+
+html[data-bs-theme="dark"] .mc-nav-link{
+
+  color:#9CA3AF;
+
+}
+
+html[data-bs-theme="dark"] .mc-nav-link.active{
+
+  color:#34D399;
+
+}
+
+html[data-bs-theme="dark"] .mc-nav-link.active .mc-nav-icon{
+
+  background:#064E3B;
+
+  box-shadow:
+
+      0 8px 20px rgba(52,211,153,.25);
+
+}
+
+html[data-bs-theme="dark"] .mc-nav-link.active i{
+
+  color:#34D399;
+
+}
+
+/*=========================================================
+  ACTIVE INDICATOR
+=========================================================*/
+
+.mc-nav-link::before{
+
+  content:"";
+
+  position:absolute;
+
+  top:-10px;
+
+  width:0;
+
+  height:4px;
+
+  border-radius:50px;
+
+  background:var(--primary);
+
+  transition:.30s;
+
+}
+
+.mc-nav-link.active::before{
+
+  width:28px;
+
+}
+
+/*=========================================================
+  CLICK EFFECT
+=========================================================*/
+
+.mc-nav-link:active{
+
+  transform:scale(.95);
+
+}
+
+/*=========================================================
+  MOBILE
+=========================================================*/
+
+@media(max-width:576px){
+
+.mc-bottom-nav{
+
+height:74px;
+
+padding:0 6px;
+
+}
+
+.mc-nav-link{
+
+width:62px;
+
+}
+
+.mc-nav-icon{
+
+width:42px;
+
+height:42px;
+
+}
+
+.mc-nav-icon i{
+
+font-size:20px;
+
+}
+
+.mc-nav-text{
+
+font-size:.66rem;
+
+}
+
+}
+
+/*=========================================================
+  TABLET
+=========================================================*/
+
+@media(min-width:768px){
+
+.mc-bottom-nav{
+
+left:50%;
+
+transform:translateX(-50%);
+
+width:650px;
+
+bottom:18px;
+
+border-radius:22px;
+
+}
+
+}
+
+/*=========================================================
+  LARGE DESKTOP
+=========================================================*/
+
+@media(min-width:1200px){
+
+.mc-bottom-nav{
+
+width:720px;
+
+}
+
+}
+
+
+.bell-btn {
+  position: relative;
+}
+
+.mc-badge.pulse {
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.3); }
+  100% { transform: scale(1); }
+}
+
+
+
+
+/*=========================================================
+    MASKIIN CAAWIYE
+    PART 2
+    HEADER + DASHBOARD + CARDS
+=========================================================*/
+
+
+/* ==========================
+   HEADER
+========================== */
+
+.mc-header{
+
+  background:var(--card);
+
+  border:1px solid var(--border);
+
+  border-radius:20px;
+
+  padding:18px 24px;
+
+  margin-bottom:25px;
+
+  box-shadow:var(--shadow-sm);
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  gap:20px;
+
+  transition:var(--transition);
+
+}
+
+.mc-header-left{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:18px;
+
+}
+
+.mc-logo{
+
+  width:56px;
+
+  height:56px;
+
+  border-radius:18px;
+
+  background:linear-gradient(135deg,var(--primary),var(--primary-dark));
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  color:#fff;
+
+  font-size:24px;
+
+  font-weight:700;
+
+  box-shadow:0 10px 30px rgba(14,159,110,.25);
+
+}
+
+.mc-header-title{
+
+  font-size:1.4rem;
+
+  font-weight:700;
+
+  color:var(--text);
+
+}
+
+.mc-header-subtitle{
+
+  font-size:.88rem;
+
+  color:var(--text-light);
+
+}
+
+.mc-header-right{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:12px;
+
+}
+
+
+/* ==========================
+ HEADER BUTTONS
+========================== */
+
+.mc-icon-btn{
+
+  width:46px;
+
+  height:46px;
+
+  border-radius:14px;
+
+  border:1px solid var(--border);
+
+  background:var(--card);
+
+  display:flex;
+
+  justify-content:center;
+
+  align-items:center;
+
+  transition:.3s;
+
+}
+
+.mc-icon-btn:hover{
+
+  background:var(--primary);
+
+  color:#fff;
+
+  border-color:var(--primary);
+
+  transform:translateY(-2px);
+
+}
+
+
+/* ==========================
+ PAGE HEADER
+========================== */
+
+.page-header{
+
+  margin-bottom:28px;
+
+}
+
+.page-header h2{
+
+  font-size:2rem;
+
+  font-weight:700;
+
+  color:var(--text);
+
+}
+
+.page-header p{
+
+  color:var(--text-light);
+
+  margin-top:8px;
+
+}
+
+
+/* ==========================
+ DASHBOARD GRID
+========================== */
+
+.dashboard-grid{
+
+  display:grid;
+
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+
+  gap:20px;
+
+}
+
+
+/* ==========================
+ DASHBOARD CARD
+========================== */
+
+.dashboard-stat-card{
+
+  background:var(--card);
+
+  border-radius:22px;
+
+  border:1px solid var(--border);
+
+  padding:24px;
+
+  position:relative;
+
+  overflow:hidden;
+
+  transition:.35s;
+
+  box-shadow:var(--shadow-sm);
+
+}
+
+.dashboard-stat-card:hover{
+
+  transform:translateY(-8px);
+
+  box-shadow:var(--shadow-lg);
+
+}
+
+
+/* TOP ACCENT */
+
+.dashboard-stat-card::before{
+
+  content:"";
+
+  position:absolute;
+
+  top:0;
+
+  left:0;
+
+  width:100%;
+
+  height:5px;
+
+  background:linear-gradient(
+      90deg,
+      var(--primary),
+      var(--secondary)
+  );
+
+}
+
+
+/* ==========================
+ CARD LABEL
+========================== */
+
+.dashboard-stat-card span{
+
+  color:var(--text-light);
+
+  font-size:.82rem;
+
+  font-weight:600;
+
+  text-transform:uppercase;
+
+  letter-spacing:.7px;
+
+}
+
+
+/* ==========================
+ VALUE
+========================== */
+
+.dashboard-stat-card h3{
+
+  margin-top:12px;
+
+  margin-bottom:10px;
+
+  font-size:2rem;
+
+  font-weight:700;
+
+  color:var(--text);
+
+}
+
+
+/* ==========================
+ DESCRIPTION
+========================== */
+
+.dashboard-stat-card small,
+
+.dashboard-stat-card .small{
+
+  color:var(--text-light);
+
+}
+
+
+/* ==========================
+ ICON
+========================== */
+
+.stat-icon-wrapper{
+
+  width:64px;
+
+  height:64px;
+
+  border-radius:18px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  font-weight:700;
+
+  font-size:.85rem;
+
+  transition:.35s;
+
+}
+
+.dashboard-stat-card:hover .stat-icon-wrapper{
+
+  transform:rotate(-8deg) scale(1.05);
+
+}
+
+
+/* ==========================
+ CONTENT CARD
+========================== */
+
+.card{
+
+  border:none !important;
+
+  background:var(--card) !important;
+
+  border-radius:22px !important;
+
+  box-shadow:var(--shadow-sm) !important;
+
+  transition:.3s;
+
+}
+
+.card:hover{
+
+  box-shadow:var(--shadow-md) !important;
+
+}
+
+
+/* ==========================
+ CARD TITLES
+========================== */
+
+.card h5{
+
+  font-weight:700;
+
+  color:var(--text);
+
+}
+
+
+/* ==========================
+ CARD BODY
+========================== */
+
+.card p{
+
+  color:var(--text-light);
+
+}
+
+
+/* ==========================
+ BADGES
+========================== */
+
+.badge{
+
+  border-radius:30px;
+
+  padding:9px 14px;
+
+  font-weight:600;
+
+}
+
+
+/* ==========================
+ PROGRESS
+========================== */
+
+.progress{
+
+  height:8px;
+
+  border-radius:30px;
+
+  background:#E2E8F0;
+
+  overflow:hidden;
+
+}
+
+.progress-bar{
+
+  border-radius:30px;
+
+}
+
+
+/* ==========================
+ SHADOW HELPERS
+========================== */
+
+.shadow-hover{
+
+  transition:.3s;
+
+}
+
+.shadow-hover:hover{
+
+  transform:translateY(-5px);
+
+  box-shadow:var(--shadow-lg);
+
+}
+
+
+
+
+/* ==========================
+ RESPONSIVE
+========================== */
+
+@media(max-width:768px){
+
+.mc-header{
+
+flex-direction:column;
+
+align-items:flex-start;
+
+}
+
+.mc-header-right{
+
+width:100%;
+
+justify-content:flex-end;
+
+}
+
+.dashboard-stat-card{
+
+padding:20px;
+
+}
+
+.dashboard-stat-card h3{
+
+font-size:1.6rem;
+
+}
+
+.page-header h2{
+
+font-size:1.5rem;
+
+}
+
+}
+
+/*=========================================================
+    MASKIIN CAAWIYE
+    PART 3
+    TABLES • FORMS • BUTTONS • TOASTS
+=========================================================*/
+
+
+/*=========================================================
+    SECTION CONTAINER
+=========================================================*/
+
+.section{
+
+  background:var(--card);
+
+  border:1px solid var(--border);
+
+  border-radius:22px;
+
+  padding:24px;
+
+  margin-bottom:25px;
+
+  box-shadow:var(--shadow-sm);
+
+}
+
+
+/*=========================================================
+  SECTION HEADER
+=========================================================*/
+
+.section-header{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  margin-bottom:22px;
+
+  gap:15px;
+
+  flex-wrap:wrap;
+
+}
+
+.section-title{
+
+  font-size:1.3rem;
+
+  font-weight:700;
+
+  color:var(--text);
+
+}
+
+
+/*=========================================================
+  SEARCH
+=========================================================*/
+
+.search-box{
+
+  position:relative;
+
+  width:320px;
+
+  max-width:100%;
+
+}
+
+.search-box input{
+
+  padding-left:50px;
+
+}
+
+.search-box i{
+
+  position:absolute;
+
+  top:50%;
+
+  left:18px;
+
+  transform:translateY(-50%);
+
+  color:var(--text-light);
+
+}
+
+
+/*=========================================================
+  FILTER BAR
+=========================================================*/
+
+.filter-bar{
+
+  display:flex;
+
+  gap:12px;
+
+  flex-wrap:wrap;
+
+  margin-bottom:22px;
+
+}
+
+
+/*=========================================================
+  TABLE
+=========================================================*/
+
+.table-wrapper{
+
+  overflow-x:auto;
+
+  border-radius:18px;
+
+}
+
+table{
+
+  width:100%;
+
+  border-collapse:collapse;
+
+  min-width:900px;
+
+}
+
+thead{
+
+  background:var(--primary);
+
+  color:white;
+
+}
+
+thead th{
+
+  padding:16px;
+
+  font-size:.85rem;
+
+  text-transform:uppercase;
+
+  letter-spacing:.5px;
+
+  font-weight:700;
+
+}
+
+tbody tr{
+
+  transition:.25s;
+
+  border-bottom:1px solid var(--border);
+
+}
+
+tbody tr:hover{
+
+  background:rgba(14,159,110,.06);
+
+}
+
+tbody td{
+
+  padding:16px;
+
+  color:var(--text);
+
+  vertical-align:middle;
+
+}
+
+tbody tr:last-child{
+
+  border-bottom:none;
+
+}
+
+
+/*=========================================================
+  TABLE ACTION BUTTONS
+=========================================================*/
+
+.table-actions{
+
+  display:flex;
+
+  gap:8px;
+
+}
+
+.table-btn{
+
+  width:36px;
+
+  height:36px;
+
+  border-radius:10px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  transition:.25s;
+
+}
+
+.table-btn:hover{
+
+  transform:translateY(-2px);
+
+}
+
+
+/*=========================================================
+  BUTTONS
+=========================================================*/
+
+.btn{
+
+  border-radius:14px !important;
+
+  padding:12px 22px !important;
+
+  font-weight:600 !important;
+
+  transition:.3s !important;
+
+}
+
+.btn:hover{
+
+  transform:translateY(-2px);
+
+}
+
+.btn-primary{
+
+  background:var(--primary)!important;
+
+  border-color:var(--primary)!important;
+
+}
+
+.btn-primary:hover{
+
+  background:var(--primary-dark)!important;
+
+}
+
+.btn-success{
+
+  background:var(--success)!important;
+
+}
+
+.btn-danger{
+
+  background:var(--danger)!important;
+
+}
+
+.btn-warning{
+
+  background:var(--warning)!important;
+
+}
+
+
+/*=========================================================
+  INPUT GROUP
+=========================================================*/
+
+.form-group{
+
+  margin-bottom:22px;
+
+}
+
+.form-group label{
+
+  display:block;
+
+  margin-bottom:8px;
+
+  font-weight:600;
+
+  color:var(--text);
+
+}
+
+.form-control,
+.form-select{
+
+    background:var(--card);
+
+    color:var(--text);
+
+    border:1px solid var(--border);
+
+}
+
+.form-control::placeholder{
+
+    color:var(--text-light);
+
+}
+
+html[data-bs-theme="dark"] .form-control,
+html[data-bs-theme="dark"] .form-select{
+
+    background:#1E293B;
+
+    color:#F8FAFC;
+
+    border-color:#334155;
+
+}
+
+html[data-bs-theme="dark"] .form-control:focus,
+html[data-bs-theme="dark"] .form-select:focus{
+
+    background:#1E293B;
+
+    color:#fff;
+
+}
+
+
+/*=========================================================
+  CHECKBOX
+=========================================================*/
+
+.form-check{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:10px;
+
+}
+
+.form-check-input{
+
+  width:20px;
+
+  height:20px;
+
+}
+
+
+/*=========================================================
+  MODAL
+=========================================================*/
+
+html[data-bs-theme="dark"] .modal-content{
+
+  background:#111827;
+  
+  color:#F8FAFC;
+  
+  }
+  
+  html[data-bs-theme="dark"] .modal-header,
+  
+  html[data-bs-theme="dark"] .modal-footer{
+  
+  border-color:#334155;
+  
+  }
+  
+  html[data-bs-theme="dark"] .btn-close{
+  
+  filter:invert(1);
+  
+  }
+
+.modal-header{
+
+  border-bottom:1px solid var(--border);
+
+}
+
+.modal-footer{
+
+  border-top:1px solid var(--border);
+
+}
+
+
+/*=========================================================
+  ALERTS
+=========================================================*/
+
+.alert{
+
+  border:none;
+
+  border-radius:16px;
+
+  padding:16px 20px;
+
+}
+
+
+/*=========================================================
+  BADGES
+=========================================================*/
+
+.badge-success{
+
+  background:#DCFCE7;
+
+  color:#15803D;
+
+}
+
+.badge-warning{
+
+  background:#FEF3C7;
+
+  color:#B45309;
+
+}
+
+.badge-danger{
+
+  background:#FEE2E2;
+
+  color:#B91C1C;
+
+}
+
+
+/*=========================================================
+  PAGINATION
+=========================================================*/
+
+.pagination{
+
+  display:flex;
+
+  justify-content:flex-end;
+
+  gap:10px;
+
+  margin-top:20px;
+
+}
+
+.page-link{
+
+  border:none;
+
+  border-radius:12px;
+
+  color:var(--text);
+
+  background:var(--card);
+
+  box-shadow:var(--shadow-sm);
+
+}
+
+.page-item.active .page-link{
+
+  background:var(--primary);
+
+  color:white;
+
+}
+
+
+/*=========================================================
+  TOAST
+=========================================================*/
+
+.toast{
+
+  position:fixed;
+
+  right:25px;
+
+  bottom:110px;
+
+  min-width:320px;
+
+  padding:18px;
+
+  border-radius:18px;
+
+  color:white;
+
+  font-weight:600;
+
+  transform:translateX(450px);
+
+  transition:.35s;
+
+  z-index:99999;
+
+  box-shadow:var(--shadow-lg);
+
+}
+
+.toast.show{
+
+  transform:translateX(0);
+
+}
+
+.toast.success{
+
+  background:var(--success);
+
+}
+
+.toast.error{
+
+  background:var(--danger);
+
+}
+
+.toast.warning{
+
+  background:var(--warning);
+
+}
+
+
+/*=========================================================
+  LOADING BUTTON
+=========================================================*/
+
+.btn-loading{
+
+  pointer-events:none;
+
+  opacity:.75;
+
+}
+
+
+/*=========================================================
+  EMPTY STATE
+=========================================================*/
+
+.empty-state{
+
+  text-align:center;
+
+  padding:60px 20px;
+
+  color:var(--text-light);
+
+}
+
+.empty-state img{
+
+  width:120px;
+
+  margin:auto;
+
+  margin-bottom:20px;
+
+}
+
+
+
+/*=========================================================
+  MOBILE
+=========================================================*/
+
+@media(max-width:768px){
+
+.search-box{
+
+width:100%;
+
+}
+
+.section-header{
+
+flex-direction:column;
+
+align-items:stretch;
+
+}
+
+.filter-bar{
+
+flex-direction:column;
+
+}
+
+.btn-mobile-full{
+
+width:100%;
+
+}
+
+.table-actions{
+
+justify-content:center;
+
+}
+
+.toast{
+
+left:15px;
+
+right:15px;
+
+bottom:95px;
+
+min-width:auto;
+
+}
+
+}
+
+
+/*=========================================================
+    MASKIIN CAAWIYE
+    PART 4
+    PREMIUM UI • ANIMATIONS • UTILITIES • FINISHING
+=========================================================*/
+
+
+/*=========================================================
+    FADE ANIMATIONS
+=========================================================*/
+
+@keyframes fadeUp{
+
+  from{
+
+      opacity:0;
+
+      transform:translateY(25px);
+
+  }
+
+  to{
+
+      opacity:1;
+
+      transform:translateY(0);
+
+  }
+
+}
+
+@keyframes fadeIn{
+
+  from{
+
+      opacity:0;
+
+  }
+
+  to{
+
+      opacity:1;
+
+  }
+
+}
+
+.fade-up{
+
+  animation:fadeUp .45s ease;
+
+}
+
+.fade-in{
+
+  animation:fadeIn .35s ease;
+
+}
+
+
+/*=========================================================
+  HOVER EFFECTS
+=========================================================*/
+
+.hover-lift{
+
+  transition:.30s;
+
+}
+
+.hover-lift:hover{
+
+  transform:translateY(-6px);
+
+  box-shadow:var(--shadow-lg);
+
+}
+
+.hover-grow{
+
+  transition:.30s;
+
+}
+
+.hover-grow:hover{
+
+  transform:scale(1.03);
+
+}
+
+
+/*=========================================================
+  AVATAR
+=========================================================*/
+
+.avatar{
+
+  width:46px;
+
+  height:46px;
+
+  border-radius:50%;
+
+  overflow:hidden;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  background:var(--primary);
+
+  color:#fff;
+
+  font-weight:700;
+
+}
+
+.avatar img{
+
+  width:100%;
+
+  height:100%;
+
+  object-fit:cover;
+
+}
+
+
+/*=========================================================
+  PROFILE CARD
+=========================================================*/
+
+.profile-card{
+
+  background:var(--card);
+
+  border:1px solid var(--border);
+
+  border-radius:22px;
+
+  padding:24px;
+
+  text-align:center;
+
+  box-shadow:var(--shadow-sm);
+
+}
+
+.profile-card h4{
+
+  margin-top:16px;
+
+  font-weight:700;
+
+}
+
+.profile-card p{
+
+  color:var(--text-light);
+
+}
+
+
+/*=========================================================
+  STAT WIDGET
+=========================================================*/
+
+.stat-widget{
+
+  background:linear-gradient(
+      135deg,
+      var(--primary),
+      var(--primary-dark)
+  );
+
+  color:#fff;
+
+  border-radius:24px;
+
+  padding:28px;
+
+  position:relative;
+
+  overflow:hidden;
+
+}
+
+.stat-widget::after{
+
+  content:"";
+
+  position:absolute;
+
+  right:-40px;
+
+  top:-40px;
+
+  width:150px;
+
+  height:150px;
+
+  border-radius:50%;
+
+  background:rgba(255,255,255,.08);
+
+}
+
+.stat-widget h2{
+
+  font-size:2rem;
+
+  font-weight:700;
+
+}
+
+.stat-widget p{
+
+  opacity:.9;
+
+}
+
+
+/*=========================================================
+  CHART CARD
+=========================================================*/
+
+.chart-card{
+
+  background:var(--card);
+
+  border-radius:22px;
+
+  border:1px solid var(--border);
+
+  padding:24px;
+
+  box-shadow:var(--shadow-sm);
+
+}
+
+.chart-placeholder{
+
+  height:320px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  color:var(--text-light);
+
+}
+
+
+/*=========================================================
+  QUICK ACTIONS
+=========================================================*/
+
+.quick-actions{
+
+  display:grid;
+
+  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+
+  gap:18px;
+
+}
+
+.quick-action{
+
+  background:var(--card);
+
+  border:1px solid var(--border);
+
+  border-radius:18px;
+
+  padding:20px;
+
+  text-align:center;
+
+  transition:.30s;
+
+  cursor:pointer;
+
+}
+
+.quick-action:hover{
+
+  background:var(--primary);
+
+  color:#07e961;
+
+  transform:translateY(-5px);
+
+}
+
+.quick-action i{
+
+  font-size:28px;
+
+  margin-bottom:12px;
+
+}
+
+
+/*=========================================================
+  DIVIDER
+=========================================================*/
+
+.divider{
+
+  height:1px;
+
+  background:var(--border);
+
+  margin:25px 0;
+
+}
+
+
+/*=========================================================
+  STATUS DOTS
+=========================================================*/
+
+.status{
+
+  display:inline-flex;
+
+  align-items:center;
+
+  gap:8px;
+
+}
+
+.status::before{
+
+  content:"";
+
+  width:10px;
+
+  height:10px;
+
+  border-radius:50%;
+
+}
+
+.status.online::before{
+
+  background:#22C55E;
+
+}
+
+.status.pending::before{
+
+  background:#F59E0B;
+
+}
+
+.status.offline::before{
+
+  background:#EF4444;
+
+}
+
+
+/*=========================================================
+  SKELETON LOADING
+=========================================================*/
+
+.skeleton{
+
+  background:linear-gradient(
+      90deg,
+      #E5E7EB 25%,
+      #F8FAFC 50%,
+      #E5E7EB 75%
+  );
+
+  background-size:200% 100%;
+
+  animation:skeleton 1.2s infinite;
+
+  border-radius:12px;
+
+}
+
+@keyframes skeleton{
+
+  0%{
+
+      background-position:200% 0;
+
+  }
+
+  100%{
+
+      background-position:-200% 0;
+
+  }
+
+}
+
+
+/*=========================================================
+  UTILITIES
+=========================================================*/
+
+.rounded-xl{
+
+  border-radius:22px;
+
+}
+
+.text-primary{
+
+  color:var(--primary)!important;
+
+}
+
+.bg-primary-soft{
+
+  background:rgba(14,159,110,.12);
+
+}
+
+.border-soft{
+
+  border:1px solid var(--border);
+
+}
+
+.w-100{
+
+  width:100%;
+
+}
+
+.h-100{
+
+  height:100%;
+
+}
+
+.flex-center{
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+}
+
+.gap-10{
+
+  gap:10px;
+
+}
+
+.gap-15{
+
+  gap:15px;
+
+}
+
+.gap-20{
+
+  gap:20px;
+
+}
+
+.mt-10{
+
+  margin-top:10px;
+
+}
+
+.mt-20{
+
+  margin-top:20px;
+
+}
+
+.mt-30{
+
+  margin-top:30px;
+
+}
+
+.mb-10{
+
+  margin-bottom:10px;
+
+}
+
+.mb-20{
+
+  margin-bottom:20px;
+
+}
+
+.mb-30{
+
+  margin-bottom:30px;
+
+}
+
+
+/*=========================================================
+  FOOTER
+=========================================================*/
+
+.footer{
+
+  text-align:center;
+
+  padding:30px;
+
+  color:var(--text-light);
+
+  font-size:.9rem;
+
+}
+
+
+
+/*=========================================================
+  RESPONSIVE
+=========================================================*/
+
+@media(max-width:992px){
+
+.quick-actions{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+}
+
+@media(max-width:768px){
+
+.profile-card,
+
+.chart-card,
+
+.stat-widget{
+
+padding:20px;
+
+}
+
+.quick-actions{
+
+grid-template-columns:1fr;
+
+}
+
+.stat-widget h2{
+
+font-size:1.6rem;
+
+}
+
+}
+
+@media(max-width:480px){
+
+.page-container{
+
+padding:16px;
+
+}
+
+.section{
+
+padding:18px;
+
+}
+
+.chart-placeholder{
+
+height:220px;
+
+}
+
+}
+
+/* Light Mode */
+.mc-logo{
+    width:48px;
+    height:48px;
+    border-radius:12px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#fff;
+    color:#000;
+    font-size:22px;
+    box-shadow:0 3px 10px rgba(4, 233, 73, 0.73);
+}
+
+
+
+.mc-header{
+
+  backdrop-filter:blur(12px);
+
+  box-shadow:0 4px 18px rgba(0,0,0,.08);
+
+  border-bottom:1px solid rgba(0,0,0,.08);
+
+}

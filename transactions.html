@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maskiin Caawiye - Transactions Ledger</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- App Styles -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/transactions.css">
+</head>
+
+<body class="bg-body-tertiary">
+
+    <!-- HEADER (same as dashboard) -->
+    <div id="headerContainer"></div>
+
+    <!-- PAGE CONTENT -->
+    <div class="container-fluid px-4 pb-5">
+
+        <div class="row g-3 mb-4">
+            <div class="col-md-4">
+                <div class="metric-badge-card">
+                    <div class="history-title-context" id="totalMoneyCardLabel">
+                        Total Funds Disbursed (All)
+                    </div>
+                    <h3 class="fw-bold m-0 mt-1" id="sumTotalDisbursed">$0.00</h3>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="metric-badge-card success-variant">
+                    <div class="history-title-context" id="totalCountCardLabel">
+                        Total Transactions Saved
+                    </div>
+                    <h3 class="fw-bold text-success m-0 mt-1" id="countSettledTx">
+                        0 Logs
+                    </h3>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="metric-badge-card warning-variant">
+                    <div class="history-title-context" id="lblFilteredWindow">
+                        Filtered Window View
+                    </div>
+                    <h3 class="fw-bold text-warning m-0 mt-1" id="scopeTxCount">
+                        Showing 0
+                    </h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="card p-3 mb-4 shadow-sm border-0">
+            <div class="row g-2">
+
+                <div class="col-md-3">
+                    <label class="form-label small fw-bold text-secondary" id="lblSearch">
+                        Search Name or Phone
+                    </label>
+                    <input type="text" id="txSearch" class="form-control"
+                           placeholder="Type name or phone number for full history...">
+                </div>
+
+                <div class="col-md-2">
+                    <label class="form-label small fw-bold text-secondary" id="lblSorting">
+                        Value Sorting
+                    </label>
+                    <select id="txFilterScope" class="form-select">
+                        <option value="all" id="optSortNew">Newest Logs First</option>
+                        <option value="biggest" id="optSortBig">Biggest Payouts First</option>
+                        <option value="smallest" id="optSortSmall">Smallest Payouts First</option>
+                    </select>
+                </div>
+
+                <div class="col-md-3">
+                    <label class="form-label small fw-bold text-secondary" id="lblTimeline">
+                        Timeline Constraint
+                    </label>
+                    <select id="txDateScope" class="form-select">
+                        <option value="all" id="optTimeLife">Lifetime Records</option>
+                        <option value="today" id="optTimeToday">Today</option>
+                        <option value="week" id="optTimeWeek">Past 7 Days</option>
+                        <option value="month" id="optTimeMonth">Current Month</option>
+                    </select>
+                </div>
+
+                <div class="col-md-2">
+                    <label class="form-label small fw-bold text-secondary" id="lblLimit">
+                        Row Limit Display
+                    </label>
+                    <select id="txRowLimit" class="form-select">
+                        <option value="50" selected>First 50 Rows</option>
+                        <option value="10">First 10 Rows</option>
+                        <option value="100">First 100 Rows</option>
+                        <option value="all" id="optLimitAll">All Rows</option>
+                    </select>
+                </div>
+
+                <div class="col-md-2 d-flex align-items-end">
+                    <button class="btn btn-outline-danger w-100 fw-bold"
+                            onclick="clearSearchFilters()"
+                            id="btnResetFilters">
+                        Reset Filters
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="card p-3 shadow-sm border-0 mb-5">
+            <h5 class="mb-3 text-secondary fw-bold" id="tableHeaderTitle">
+                Settled Mobile Money Transfer (MMT) Records
+            </h5>
+
+            <!-- DESKTOP TABLE -->
+            <div class="table-responsive" id="desktopTableLayout">
+                <table class="table table-hover align-middle m-0">
+                    <thead class="table-dark">
+                        <tr>
+                            <th id="thTxId">Transaction ID</th>
+                            <th id="thTime">Timestamp</th>
+                            <th id="thProfile">Beneficiary Profile Target</th>
+                            <th id="thMobile">Target Mobile Line</th>
+                            <th id="thGateway">Network Gate</th>
+                            <th id="thScope">Scope of Evaluation</th>
+                            <th id="thAmt">Transfer Amount</th>
+                            <th class="text-center" id="thActions">Record Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="transactionTableBody"></tbody>
+                </table>
+            </div>
+
+            <!-- MOBILE LIST -->
+            <div id="mobileListLayout"></div>
+        </div>
+
+    </div>
+
+    <!-- EDIT MODAL (UNCHANGED) -->
+    <div class="modal fade" id="editTxModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content shadow-lg border-0">
+                <div class="modal-header bg-dark text-white">
+                    <h5 class="modal-title fw-bold" id="lblModalTitle">
+                        Modify Settled Transaction Record
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white"
+                            data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editTxForm">
+                        <input type="hidden" id="editTxId">
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold" id="lblModalName">
+                                Beneficiary Name
+                            </label>
+                            <input type="text" id="editTxName" class="form-control" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold" id="lblModalPhone">
+                                Mobile Line Phone Target
+                            </label>
+                            <input type="tel" id="editTxPhone" class="form-control" required>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-6">
+                                <label class="form-label fw-bold" id="lblModalGate">
+                                    Payment Gateway
+                                </label>
+                                <select id="editTxGateway" class="form-select">
+                                    <option value="EVCPlus">EVC Plus</option>
+                                    <option value="SomNet">SomNet</option>
+                                    <option value="eDahab">eDahab</option>
+                                </select>
+                            </div>
+                            <div class="col-6">
+                                <label class="form-label fw-bold" id="lblModalAmt">
+                                    Amount Sent ($)
+                                </label>
+                                <input type="number" id="editTxAmount" class="form-control" min="1" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold" id="lblModalScope">
+                                Scope of Evaluation Override
+                            </label>
+                            <select id="editTxScope" class="form-select">
+                                <option value="Family Only">Family Only</option>
+                                <option value="Family + Children">Family + Children</option>
+                                <option value="Family + Children + Extra">Family + Children + Extra</option>
+                            </select>
+                        </div>
+
+                        <div class="d-grid mt-4">
+                            <button type="submit"
+                                    class="btn btn-primary fw-bold"
+                                    id="btnModalSubmit">
+                                Apply Parameter Adjustments
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- NAVBAR -->
+    <div id="navbarContainer"></div>
+
+    <!-- SCRIPTS (ORDER IS IMPORTANT) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="js/storage.js"></script>
+    <script src="js/transactions.js"></script>
+
+    <script src="js/navbar.js"></script>
+    <script src="js/header.js"></script>
+
+</body>
+</html>

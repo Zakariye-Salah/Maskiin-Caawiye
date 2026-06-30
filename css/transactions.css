@@ -1,0 +1,87 @@
+/* Maskiin Caawiye - Responsive Transactions Stylesheet */
+
+.metric-badge-card {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 16px;
+  border-left: 4px solid #0d6efd;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+}
+.metric-badge-card.success-variant { border-left-color: #198754; }
+.metric-badge-card.warning-variant { border-left-color: #ffc107; }
+
+.history-title-context {
+  font-size: 0.82rem;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: #6c757d;
+  font-weight: 600;
+}
+
+.font-monospace-custom {
+  font-family: SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.88rem;
+}
+
+body { padding-bottom: 85px; }
+.bottom-nav { z-index: 1030; box-shadow: 0 -2px 10px rgba(0,0,0,0.05); }
+
+.badge-scope-family { background-color: #cfe2ff; color: #084298; }
+.badge-scope-children { background-color: #d1e7dd; color: #0f5132; }
+.badge-scope-extra { background-color: #fff3cd; color: #664d03; }
+
+/* Desktop vs Mobile Dynamic Containers Visibility Switch */
+#desktopTableLayout { display: block; }
+#mobileListLayout { display: none; }
+
+/* Responsive Media Queries BREAKPOINT */
+@media (max-width: 991px) {
+  #desktopTableLayout { display: none !important; }
+  #mobileListLayout { display: flex !important; flex-direction: column; gap: 12px; }
+}
+
+/* Fluid Mobile Data Stack Card Styles */
+.mobile-tx-card {
+  background: #ffffff;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+}
+
+.mobile-stack-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px dashed #f1f3f5;
+  padding-bottom: 6px;
+}
+.mobile-stack-row:last-of-type { border-bottom: none; padding-bottom: 0; }
+
+/* GLOBAL SYSTEM DARK MODE MATRIX OVERRIDES */
+body.dark-mode {
+  background-color: #121212 !important;
+  color: #e0e0e0 !important;
+}
+body.dark-mode .card,
+body.dark-mode .modal-content,
+body.dark-mode .bottom-nav,
+body.dark-mode .mobile-tx-card {
+  background-color: #1e1e1e !important;
+  color: #e0e0e0 !important;
+  border-color: #333333 !important;
+}
+body.dark-mode .table { color: #e0e0e0 !important; }
+body.dark-mode .table-dark { background-color: #111111 !important; }
+body.dark-mode text-dark, body.dark-mode strong { color: #ffffff !important; }
+body.dark-mode input, body.dark-mode select {
+  background-color: #2d2d2d !important;
+  color: #ffffff !important;
+  border-color: #444444 !important;
+}
+body.dark-mode .badge-scope-family { background-color: #0c3366; color: #cfe2ff; }
+body.dark-mode .badge-scope-children { background-color: #0b3d26; color: #d1e7dd; }
+body.dark-mode .badge-scope-extra { background-color: #4d3a02; color: #fff3cd; }
