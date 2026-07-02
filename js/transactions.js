@@ -15,7 +15,7 @@ const txDictionary = {
         optLimitAll: "All Rows", showing: "Showing", of: "of", entries: "Entries", emptyMsg: "No financial ledger lines match selected criteria.",
         lblModalTitle: "Modify Settled Transaction Record", lblModalName: "Beneficiary Name", lblModalPhone: "Mobile Line Phone Target",
         lblModalGate: "Payment Gateway", lblModalAmt: "Amount Sent ($)", lblModalScope: "Scope of Evaluation Override", btnModalSubmit: "Apply Parameter Adjustments",
-        thTxId: "Transaction ID", thTime: "Timestamp", thProfile: "Beneficiary Profile Target", thMobile: "Target Mobile Line", thGateway: "Network Gate", thScope: "Scope of Evaluation", thAmt: "Transfer Amount", thActions: "Record Actions",
+        thTxId: "Transaction ID", thTime: "Timestamp", thProfile: "Profile Target", thMobile: "Target Mobile Line", thGateway: "Network Gate", thScope: "Scope of Evaluation", thAmt: "Transfer Amount", thActions: "Record Actions",
         btnEdit: "Edit", btnDelete: "Delete", labelId: "ID", labelScope: "Scope of Evaluation", labelStatus: "Status", alertConfirmDelete: "Flag this transaction allocation receipt as soft-deleted?"
     },
     so: {
