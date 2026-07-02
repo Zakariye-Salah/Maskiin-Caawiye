@@ -1,3 +1,60 @@
+/*=========================================================
+    PREMIUM LOADER
+=========================================================*/
+
+function startDashboardLoader() {
+
+    const loader =
+        document.getElementById("dashboardLoader");
+
+    const bar =
+        document.getElementById("dashboardLoaderBar");
+
+    if (!loader || !bar) return;
+
+    let progress = 0;
+
+    const timer = setInterval(() => {
+
+        progress += 4;
+
+        if (progress > 90)
+            progress = 90;
+
+        bar.style.width = progress + "%";
+
+    }, 40);
+
+    window.dashboardLoaderTimer = timer;
+
+}
+
+function finishDashboardLoader() {
+
+    const loader =
+        document.getElementById("dashboardLoader");
+
+    const bar =
+        document.getElementById("dashboardLoaderBar");
+
+    if (!loader || !bar) return;
+
+    clearInterval(window.dashboardLoaderTimer);
+
+    bar.style.width = "100%";
+
+    setTimeout(() => {
+
+        loader.classList.add("hide");
+
+        document
+            .querySelector(".page-content")
+            ?.classList.add("loaded");
+
+    }, 400);
+
+}
+
 // --- Maskiin Caawiye: Core Localization & Configuration Engine ---
 const translations = {
     en: {
@@ -63,59 +120,426 @@ const translations = {
 // Global state context storage tracker pointers
 let currentLang = localStorage.getItem("maskiin_lang") || "en";
 
+/*=========================================================
+    APPLICATION STARTUP
+=========================================================*/
+
+let dashboardInitialized = false;
+
 document.addEventListener("DOMContentLoaded", () => {
-    // Sync UI elements with historical selections
+
+    startDashboardLoader();
+
     initAppTheme();
-    switchDashboardLanguage(currentLang);
-    initializeDashboardCounters();
+
+    try {
+
+        switchDashboardLanguage(currentLang, false);
+
+    } catch (e) {
+
+        console.error(e);
+
+    }
+
+    requestAnimationFrame(() => {
+
+        initializeDashboardCounters(true);
+
+        dashboardInitialized = true;
+
+    });
+
+    // Refresh data every 5 seconds WITHOUT animation
+    setInterval(() => {
+
+        initializeDashboardCounters(false);
+
+    }, 5000);
+
+    setTimeout(() => {
+
+        finishDashboardLoader();
+
+    }, 900);
+
 });
+
+
+
+/*=========================================================
+    PREMIUM NUMBER ANIMATION V4.0
+=========================================================*/
+
+function animateNumber(element, endValue, options = {}) {
+
+    if (!element) return;
+
+    const {
+        prefix = "",
+        suffix = "",
+        decimals = 0,
+        duration = 1500,
+        delay = 0,
+        easing = "easeOut"
+    } = options;
+
+    // Stop previous animation if one is running
+    if (element._animationFrame) {
+        cancelAnimationFrame(element._animationFrame);
+    }
+
+    clearTimeout(element._animationDelay);
+
+    element._animationDelay = setTimeout(() => {
+
+        const startTime = performance.now();
+        const startValue = 0;
+
+        function frame(now) {
+
+            let progress = (now - startTime) / duration;
+
+            if (progress > 1) progress = 1;
+
+            let eased;
+
+            switch (easing) {
+
+                case "linear":
+                    eased = progress;
+                    break;
+
+                case "easeIn":
+                    eased = progress * progress;
+                    break;
+
+                case "easeInOut":
+                    eased =
+                        progress < 0.5
+                            ? 2 * progress * progress
+                            : 1 - Math.pow(-2 * progress + 2, 2) / 2;
+                    break;
+
+                default:
+                    eased = 1 - Math.pow(1 - progress, 3);
+            }
+
+            let value = startValue + (endValue - startValue) * eased;
+
+            // Whole numbers for counters
+            if (decimals === 0) {
+                value = Math.round(value);
+            }
+
+            element.textContent =
+                prefix +
+                value.toLocaleString(undefined, {
+                    minimumFractionDigits: decimals,
+                    maximumFractionDigits: decimals
+                }) +
+                suffix;
+
+            if (progress < 1) {
+
+                element._animationFrame =
+                    requestAnimationFrame(frame);
+
+            } else {
+
+                element.textContent =
+                    prefix +
+                    endValue.toLocaleString(undefined, {
+                        minimumFractionDigits: decimals,
+                        maximumFractionDigits: decimals
+                    }) +
+                    suffix;
+
+                element._animationFrame = null;
+            }
+
+        }
+
+        element._animationFrame =
+            requestAnimationFrame(frame);
+
+    }, delay);
+
+}
+
+/*=========================================================
+    PREMIUM PERCENTAGE ANIMATION V3.0
+=========================================================*/
+
+function animatePercentageLabel(
+
+    percentage,
+
+    text,
+
+    options = {}
+
+) {
+
+    const element =
+
+        document.getElementById(
+
+            "dashFundedRatioLabel"
+
+        );
+
+    if (!element) return;
+
+    const {
+
+        duration = 1500,
+
+        delay = 0,
+
+        decimals = 1,
+
+        suffix = "%"
+
+    } = options;
+
+    setTimeout(() => {
+
+        const startTime = performance.now();
+
+        function frame(now) {
+
+            const progress = Math.min(
+
+                (now - startTime) / duration,
+
+                1
+
+            );
+
+            const eased =
+
+                1 - Math.pow(1 - progress, 3);
+
+            const value =
+
+                percentage * eased;
+
+            element.textContent =
+
+                value.toFixed(decimals)
+
+                + suffix
+
+                + " "
+
+                + text;
+
+            if (progress < 1) {
+
+                requestAnimationFrame(frame);
+
+            }
+
+            else {
+
+                element.textContent =
+
+                    percentage.toFixed(decimals)
+
+                    + suffix
+
+                    + " "
+
+                    + text;
+
+            }
+
+        }
+
+        requestAnimationFrame(frame);
+
+    }, delay);
+
+}
 
 // --- CORE ANALYTICS AND METRIC CALCULATION LOGICS ---
 function initializeDashboardCounters() {
-    // Live Native Calendar Tracking Integration
+
+    /*=========================================================
+        LIVE DATE
+    =========================================================*/
+
     const calendarBadge = document.getElementById("liveCalendarBadge");
+
     if (calendarBadge) {
-        calendarBadge.innerText = new Date().toLocaleDateString(currentLang === 'en' ? 'en-US' : 'so-SO', {
-            weekday: 'short', month: 'short', day: 'numeric', year: 'numeric'
-        });
+        calendarBadge.innerText = new Date().toLocaleDateString(
+            currentLang === "en" ? "en-US" : "so-SO",
+            {
+                weekday: "short",
+                month: "short",
+                day: "numeric",
+                year: "numeric"
+            }
+        );
     }
 
-    // Direct Extraction from synchronized mock global database storage hooks
-    const transactions = (typeof StorageEngine !== 'undefined' && StorageEngine.getTransactions) ? (StorageEngine.getTransactions() || []) : [];
-    const people = (typeof StorageEngine !== 'undefined' && StorageEngine.getPeople) ? (StorageEngine.getPeople() || []) : [];
+    /*=========================================================
+        LOAD DATA
+    =========================================================*/
 
-    const globalTotalSum = transactions.reduce((acc, curr) => acc + (parseFloat(curr.amount) || 0), 0);
-    const uniqueFundedPhones = [...new Set(transactions.map(t => String(t.phone || '').trim()))].filter(Boolean);
-    
+    const transactions =
+        (typeof StorageEngine !== "undefined" && StorageEngine.getTransactions)
+            ? StorageEngine.getTransactions()
+            : [];
+
+    const people =
+        (typeof StorageEngine !== "undefined" && StorageEngine.getPeople)
+            ? StorageEngine.getPeople()
+            : [];
+
+    const globalTotalSum = transactions.reduce(
+        (sum, tx) => sum + (parseFloat(tx.amount) || 0),
+        0
+    );
+
+    const uniqueFundedPhones = [
+        ...new Set(
+            transactions
+                .map(t => String(t.phone || "").trim())
+                .filter(Boolean)
+        )
+    ];
+
     const registrationCount = people.length;
-    const coverageRatio = registrationCount > 0 ? ((uniqueFundedPhones.length / registrationCount) * 100) : 0;
 
-    // UI Updates: Card 1 & Card 2
-    document.getElementById("dashTotalDisbursed").innerText = `$${globalTotalSum.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
-    document.getElementById("dashTxCountLabel").innerText = `${transactions.length} ${translations[currentLang].settlements_suffix}`;
-    document.getElementById("dashTotalPeople").innerText = registrationCount.toLocaleString();
-    document.getElementById("dashFundedRatioLabel").innerText = `${coverageRatio.toFixed(1)}% ${translations[currentLang].coverage_suffix}`;
+    const coverageRatio =
+        registrationCount === 0
+            ? 0
+            : (uniqueFundedPhones.length / registrationCount) * 100;
 
-    // Extract Context Distribution Values
+    /*=========================================================
+        FAMILY COUNTS
+    =========================================================*/
+
     let familyCount = 0;
     let extraScopeCount = 0;
 
-    transactions.forEach(t => {
-        const scope = t.scopeEvaluation || t.paymentScope || "Family Only";
-        if (scope.includes("Children") || scope.includes("Extra") || scope.includes("child")) {
+    transactions.forEach(tx => {
+
+        const scope =
+            tx.scopeEvaluation ||
+            tx.paymentScope ||
+            "Family Only";
+
+        if (
+            scope.includes("Children") ||
+            scope.includes("Extra") ||
+            scope.includes("child")
+        ) {
             extraScopeCount++;
         } else {
             familyCount++;
         }
+
     });
 
-    document.getElementById("dashFamilyCount").innerText = familyCount.toLocaleString();
-    document.getElementById("dashChildrenCount").innerText = extraScopeCount.toLocaleString();
+    /*=========================================================
+        CACHE ELEMENTS
+    =========================================================*/
 
-    // Render Sub-components
+    const dashTotalDisbursed = document.getElementById("dashTotalDisbursed");
+    const dashTotalPeople = document.getElementById("dashTotalPeople");
+    const dashFamilyCount = document.getElementById("dashFamilyCount");
+    const dashChildrenCount = document.getElementById("dashChildrenCount");
+    const dashTxCountLabel = document.getElementById("dashTxCountLabel");
+
+    if (
+        !dashTotalDisbursed ||
+        !dashTotalPeople ||
+        !dashFamilyCount ||
+        !dashChildrenCount
+    ) {
+        console.error("Dashboard elements not found.");
+        return;
+    }
+
+    /*=========================================================
+        LABEL
+    =========================================================*/
+
+    if (dashTxCountLabel) {
+        dashTxCountLabel.innerText =
+            `${transactions.length} ${translations[currentLang].settlements_suffix}`;
+    }
+
+    /*=========================================================
+        RESET
+    =========================================================*/
+
+    dashTotalDisbursed.textContent = "$0.00";
+    dashTotalPeople.textContent = "0";
+    dashFamilyCount.textContent = "0";
+    dashChildrenCount.textContent = "0";
+
+    /*=========================================================
+        ANIMATE
+    =========================================================*/
+
+    animateNumber(
+        dashTotalDisbursed,
+        globalTotalSum,
+        {
+            prefix: "$",
+            decimals: 2,
+            duration: 1800
+        }
+    );
+
+    animateNumber(
+        dashTotalPeople,
+        registrationCount,
+        {
+            duration: 1500,
+            delay: 200
+        }
+    );
+
+    animateNumber(
+        dashFamilyCount,
+        familyCount,
+        {
+            duration: 1500,
+            delay: 400
+        }
+    );
+
+    animateNumber(
+        dashChildrenCount,
+        extraScopeCount,
+        {
+            duration: 1500,
+            delay: 600
+        }
+    );
+
+    animatePercentageLabel(
+        coverageRatio,
+        translations[currentLang].coverage_suffix,
+        {
+            duration: 1500,
+            delay: 800
+        }
+    );
+
+    /*=========================================================
+        COMPONENTS
+    =========================================================*/
+
     renderOperatorDistribution(transactions);
     renderScopeDistribution(transactions);
     renderRecentActivities(transactions);
+
 }
 
 function renderOperatorDistribution(transactions) {
@@ -226,8 +650,10 @@ function renderRecentActivities(transactions) {
     container.innerHTML = streamFeedList.map(t => {
         const dynamicTime = t.date ? new Date(t.date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : 'Now';
         const printAmount = parseFloat(t.amount) || 0;
-        const name = t.name || 'Beneficiary';
-        const gw = t.gateway || 'EVCPlus';
+        const name =
+        t.familyName ||
+        t.name ||
+        "Beneficiary";        const gw = t.gateway || 'EVCPlus';
         
         let variant = "primary-variant";
         if (gw === "eDahab") variant = "success-variant";
@@ -305,4 +731,4 @@ function switchDashboardLanguage(lang) {
 
     // Re-render counters to dynamically alter system values
     initializeDashboardCounters();
-}
+} 
