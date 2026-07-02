@@ -124,6 +124,14 @@ function initializeHeader(){
 
     startSystemMessages();
 
+    const notificationBtn = document.getElementById("notificationBtn");
+
+if (notificationBtn) {
+
+    notificationBtn.addEventListener("click", openNotifications);
+
+}
+
 }
 
 /*=========================================================
@@ -181,6 +189,37 @@ function toggleTheme(){
 function applyTheme(theme,showToast=true){
 
     currentTheme = theme;
+
+
+    const mobileIcon =
+document.getElementById("mobileThemeIcon");
+
+const status =
+document.getElementById("themeStatus");
+
+if(mobileIcon){
+
+    if(theme==="dark"){
+
+        mobileIcon.className =
+        "bi bi-moon-stars-fill text-warning me-2";
+
+        status.textContent="ON";
+
+        status.className="badge bg-success";
+
+    }else{
+
+        mobileIcon.className =
+        "bi bi-sun-fill text-warning me-2";
+
+        status.textContent="OFF";
+
+        status.className="badge bg-secondary";
+
+    }
+
+}
 
     saveTheme(theme);
 
@@ -266,6 +305,22 @@ function setLanguage(lang){
 
     applyLanguage(lang,true);
 
+    
+
+}
+
+function toggleLanguage(){
+
+    if(currentLanguage==="en"){
+
+        setLanguage("so");
+
+    }else{
+
+        setLanguage("en");
+
+    }
+
 }
 
 function applyLanguage(
@@ -277,6 +332,30 @@ function applyLanguage(
 ){
 
     currentLanguage = lang;
+
+    const label =
+document.getElementById("languageLabel");
+
+const status =
+document.getElementById("languageStatus");
+
+if(label){
+
+    if(lang==="so"){
+
+        label.textContent="Luuqada";
+
+        status.textContent="SO";
+
+    }else{
+
+        label.textContent="Language";
+
+        status.textContent="ENG";
+
+    }
+
+}
 
     localStorage.setItem(
 
@@ -348,43 +427,43 @@ function applyLanguage(
 DATE
 =========================================================*/
 
-function updateDate(){
+function updateDate() {
 
-    const el =
+    const mobileDate =
+        document.getElementById("headerDateMobile");
 
-        document.getElementById(
-
-            "headerDate"
-
-        );
-
-    if(!el) return;
+    const desktopDate =
+        document.getElementById("headerDateDesktop");
 
     const now = new Date();
 
-    el.textContent =
-
+    const text =
         now.toLocaleDateString(
 
-            currentLanguage==="so"
-
-            ? "so-SO"
-
-            : "en-US",
+            currentLanguage === "so"
+                ? "so-SO"
+                : "en-US",
 
             {
-
-                weekday:"long",
-
-                month:"long",
-
-                day:"numeric",
-
-                year:"numeric"
-
+                weekday: "long",
+                month: "long",
+                day: "numeric",
+                year: "numeric"
             }
 
         );
+
+    if (mobileDate) {
+
+        mobileDate.textContent = text;
+
+    }
+
+    if (desktopDate) {
+
+        desktopDate.textContent = text;
+
+    }
 
 }
 
@@ -686,8 +765,7 @@ function renderNotifications(){
 
             container.innerHTML+=`
 
-<div class="mc-notification">
-
+<div class="mc-notification ${notification.read ? '' : 'mc-unread'}">
 <div class="mc-notification-icon mc-${notification.type}">
 
 <i class="${getNotificationIcon(notification.type)}"></i>
@@ -1053,6 +1131,7 @@ function initializeStorageSync(){
 
     });
 
+ 
 }
 
 
@@ -1094,6 +1173,32 @@ function startSystemMessages(){
 
 }
 
+
+/*=========================================================
+MOBILE MENU
+=========================================================*/
+
+document.addEventListener("click", function (e) {
+
+    const menu = document.getElementById("mobileMenu");
+
+    const btn = document.getElementById("mobileMenuBtn");
+
+    if (!menu || !btn) return;
+
+    if (btn.contains(e.target)) {
+
+        menu.classList.toggle("show");
+
+    }
+
+    else if (!menu.contains(e.target)) {
+
+        menu.classList.remove("show");
+
+    }
+
+});
 
 /*=========================================================
 LOGOUT
