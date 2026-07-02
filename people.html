@@ -21,25 +21,26 @@
     <!-- HEADER (same structure as dashboard) -->
     <div id="headerContainer"></div>
 
-    <div class="d-flex justify-content-between align-items-center mb-3">
-        <h4 id="" class="fw-bold m-0">Family page</h4>
-    
-        <button
-            id="btnAddNewFamily"
-            class="btn btn-primary fw-bold"
-            onclick="openFormModal()">
-            <i class="bi bi-plus-circle"></i>
-            + Add New Family
-        </button>
-    </div>
+ 
     <!-- PAGE CONTENT -->
-    <div class="container-fluid px-4 pb-5">
+    <main class="page-content">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h4 id="" class="fw-bold m-0">Family page</h4>
+        
+            <button
+                id="btnAddNewFamily"
+                class="btn btn-primary fw-bold"
+                onclick="openFormModal()">
+                <i class="bi bi-plus-circle"></i>
+                + Add New Family
+            </button>
+        </div>
+
+        <div class="container-fluid px-3 px-md-4 pb-5">
 
         <div class="card p-3 mb-4 shadow-sm border-0">
             <div class="row g-2">
-                <div class="col-md-3">
-                    <input type="text" id="globalSearch" class="form-control" placeholder="Search by name or phone...">
-                </div>
+              
                 <div class="col-md-2">
                     <select id="filterGender" class="form-select">
                         <option value="" id="optGenAll">All Genders</option>
@@ -64,6 +65,9 @@
                         <option value="date-desc" id="optSortNewest">Newest Added</option>
                         <option value="money-desc" id="optSortMoneyDesc">Highest Allocation</option>
                     </select>
+                </div>
+                <div class="col-md-3">
+                    <input type="text" id="globalSearch" class="form-control" placeholder="Search by name or phone...">
                 </div>
             </div>
         </div>
@@ -94,7 +98,6 @@
             <div id="mobilePeopleWrapper"></div>
         </div>
 
-    </div>
 
     <!-- FORM MODAL -->
     <div class="form-modal-overlay" id="formModalOverlay">
@@ -954,8 +957,11 @@ GLOBAL TOAST
     style="z-index:99999;">
 
 </div>
-    <!-- NAVBAR -->
-    <div id="navbarContainer"></div>
+</div>
+
+</main>
+
+<div id="navbarContainer"></div>
 
     <!-- SCRIPTS (ORDER MATTERS) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
