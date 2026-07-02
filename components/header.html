@@ -3,70 +3,72 @@
     PREMIUM HEADER v2.0
 ========================================================= -->
 
-<header class="mc-header shadow-sm">
+<header class="mc-header">
 
-    <!-- LEFT -->
-    <div class="mc-header-left">
+<!-- LEFT -->
 
-        <a href="dashboard.html" class="mc-brand">
+<div class="mc-header-left">
 
-            <div class="mc-logo">
-                <i class="bi bi-heart-pulse-fill"></i>
-            </div>
+    <a href="dashboard.html" class="mc-brand">
 
-            <div class="mc-brand-info">
+        <div class="mc-logo">
+            <i class="bi bi-heart-pulse-fill text-danger"></i>
+        </div>
 
-                <h5 class="mc-app-title">
-                    Maskiin Caawiye
-                </h5>
+        <div class="mc-brand-info">
 
-                <small
-                    class="mc-app-subtitle"
-                    id="headerSubtitle">
+            <h5 class="mc-app-title">
 
-                    Humanitarian Donation Management
+                Maskiin Caawiye
 
-                </small>
+            </h5>
 
-            </div>
+            <small
+                class="mc-app-subtitle">
 
-        </a>
+                NGO Management
 
-    </div>
+            </small>
 
+
+        </div>
+
+    </a>
+
+</div>
     <!-- CENTER -->
 
     <div class="mc-header-center">
 
         <div class="mc-date-card">
+    
+            <i class="bi bi-calendar-event text-primary"></i>
+    
+            <span id="headerDateDesktop">
 
-            <i class="bi bi-calendar3"></i>
-
-            <span id="headerDate">
                 Loading...
+            
             </span>
-
+    
         </div>
-
+    
     </div>
 
-    <!-- RIGHT -->
 
     <div class="mc-header-right">
 
-        <!-- ===========================
-             NOTIFICATIONS
-        ============================ -->
+        <!-- Notification -->
 
         <button
-            class="mc-icon-btn"
             id="notificationBtn"
-            onclick="openNotifications()">
+            class="mc-icon-btn"
+            type="button"
+            aria-label="Notifications">
 
             <i class="bi bi-bell-fill"></i>
 
             <span
-                class="mc-badge pulse"
+                class="mc-badge"
                 id="notifCount">
 
                 0
@@ -76,37 +78,30 @@
         </button>
 
 
-        <!-- ===========================
-             LANGUAGE
-        ============================ -->
+        <!-- Language -->
 
-        <div class="dropdown">
+        <div class="dropdown mc-desktop-only">
 
             <button
                 class="mc-icon-btn dropdown-toggle"
-                data-bs-toggle="dropdown">
+                type="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                aria-label="Language">
 
                 <i class="bi bi-translate"></i>
 
             </button>
 
-            <ul
-                class="dropdown-menu dropdown-menu-end mc-dropdown">
+            <ul class="dropdown-menu dropdown-menu-end">
 
                 <li>
 
                     <button
-                        class="dropdown-item language-item"
-                        id="lang-en"
+                        class="dropdown-item"
                         onclick="setLanguage('en')">
 
-                        <span>
-
-                            🇺🇸 English
-
-                        </span>
-
-                        <i class="bi bi-check2"></i>
+                        🇺🇸 English
 
                     </button>
 
@@ -115,17 +110,10 @@
                 <li>
 
                     <button
-                        class="dropdown-item language-item"
-                        id="lang-so"
+                        class="dropdown-item"
                         onclick="setLanguage('so')">
 
-                        <span>
-
-                            🇸🇴 Soomaali
-
-                        </span>
-
-                        <i class="bi bi-check2"></i>
+                        🇸🇴 Soomaali
 
                     </button>
 
@@ -136,39 +124,35 @@
         </div>
 
 
-        <!-- ===========================
-             THEME
-        ============================ -->
+        <!-- Theme -->
 
         <button
-            class="mc-icon-btn"
-            onclick="toggleTheme()">
+            class="mc-icon-btn mc-desktop-only"
+            type="button"
+            onclick="toggleTheme()"
+            aria-label="Theme">
 
             <i
                 id="themeIcon"
                 class="bi bi-moon-stars-fill">
-
             </i>
 
         </button>
 
 
-        <!-- ===========================
-             USER
-        ============================ -->
+        <!-- Profile -->
 
-        <div class="dropdown">
+        <div class="dropdown mc-desktop-only">
 
             <button
                 class="mc-user-btn dropdown-toggle"
-                data-bs-toggle="dropdown">
+                type="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false">
 
                 <div
                     class="mc-avatar"
                     id="adminAvatar">
-
-                    A
-
                 </div>
 
                 <div class="mc-user-info">
@@ -181,41 +165,24 @@
 
                     </span>
 
-                    <small>
-
-                        System Administrator
-
-                    </small>
-
                 </div>
 
             </button>
 
-            <ul
-                class="dropdown-menu dropdown-menu-end mc-dropdown">
+            <ul class="dropdown-menu dropdown-menu-end">
 
-                <li>
+                <li class="px-3 py-2">
 
-                    <h6 class="dropdown-header">
+                    <strong id="adminFullName">
 
-                        Account
+                        Administrator
 
-                    </h6>
+                    </strong>
 
                 </li>
 
                 <li>
-
-                    <a
-                        class="dropdown-item"
-                        href="profile.html">
-
-                        <i class="bi bi-person-circle"></i>
-
-                        My Profile
-
-                    </a>
-
+                    <hr class="dropdown-divider">
                 </li>
 
                 <li>
@@ -224,7 +191,7 @@
                         class="dropdown-item"
                         href="settings.html">
 
-                        <i class="bi bi-gear"></i>
+                        <i class="bi bi-gear me-2"></i>
 
                         Settings
 
@@ -234,52 +201,15 @@
 
                 <li>
 
-                    <a
-                        class="dropdown-item"
-                        href="#"
-                        onclick="showBackupReminder()">
-
-                        <i class="bi bi-cloud-arrow-up"></i>
-
-                        Backup Data
-
-                    </a>
-
-                </li>
-
-                <li>
-
-                    <a
-                        class="dropdown-item"
-                        href="#"
-                        onclick="toggleTheme()">
-
-                        <i class="bi bi-moon-stars"></i>
-
-                        Appearance
-
-                    </a>
-
-                </li>
-
-                <li>
-
-                    <hr class="dropdown-divider">
-
-                </li>
-
-                <li>
-
-                    <a
+                    <button
                         class="dropdown-item text-danger"
-                        href="#"
                         onclick="logout()">
 
-                        <i class="bi bi-box-arrow-right"></i>
+                        <i class="bi bi-box-arrow-right me-2"></i>
 
                         Logout
 
-                    </a>
+                    </button>
 
                 </li>
 
@@ -287,11 +217,112 @@
 
         </div>
 
+
+        <!-- Mobile Menu -->
+
+        <button
+            class="mc-icon-btn mc-mobile-only"
+            id="mobileMenuBtn"
+            type="button"
+            aria-label="Menu">
+
+            <i class="bi bi-three-dots-vertical"></i>
+
+        </button>
+
     </div>
+
 
 </header>
 
+<div
+    class="mc-mobile-menu"
+    id="mobileMenu"
+    role="menu">
 
+    <a href="profile.html">
+
+        <i class="bi bi-person-circle text-success"></i>
+
+        <div>
+
+            <strong>Profile</strong>
+
+            <small class="d-block text-muted">
+                View Profile
+            </small>
+
+        </div>
+
+    </a>
+
+    <hr class="m-0">
+
+    <button
+        onclick="toggleTheme()"
+        class="justify-content-between">
+
+        <span>
+
+            <i
+                id="mobileThemeIcon"
+                class="bi bi-moon-stars-fill text-warning me-2">
+
+            </i>
+
+            Dark Mode
+
+        </span>
+
+        <span
+            id="themeStatus"
+            class="badge bg-success">
+
+            ON
+
+        </span>
+
+    </button>
+
+    <hr class="m-0">
+
+    <button
+        onclick="toggleLanguage()"
+        class="justify-content-between">
+
+        <span>
+
+            <i class="bi bi-translate text-primary me-2"></i>
+
+            <span id="languageLabel">
+
+                Language
+
+            </span>
+
+        </span>
+
+        <span
+            id="languageStatus"
+            class="badge bg-primary">
+
+            ENG
+
+        </span>
+
+    </button>
+
+    <hr class="m-0">
+
+    <a href="settings.html">
+
+        <i class="bi bi-gear-fill text-secondary"></i>
+
+        Settings
+
+    </a>
+
+</div>
 <!-- =========================================================
     NOTIFICATION MODAL
 ========================================================= -->
@@ -299,7 +330,8 @@
 <div
     class="modal fade"
     id="notificationModal"
-    tabindex="-1">
+    tabindex="-1"
+    aria-hidden="true">
 
     <div class="modal-dialog modal-dialog-scrollable modal-lg">
 
@@ -367,3 +399,4 @@
     id="toastContainer">
 
 </div>
+
