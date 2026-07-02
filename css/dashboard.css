@@ -1,81 +1,815 @@
-/* Custom App-wide variables context styling maps */
-:root {
-  --stat-hover-translate: -4px;
+/*=========================================================
+    MASKIIN CAAWIYE NGO MANAGEMENT SYSTEM
+    PART 5 — DASHBOARD CARDS & STATISTICS
+=========================================================*/
+
+
+/*=========================================================
+  DASHBOARD GRID
+=========================================================*/
+
+.dashboard-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+
+    gap:24px;
+
+    margin-bottom:30px;
+
 }
 
-/* Card Styling enhancements built cleanly atop light/dark foundations */
-.dashboard-stat-card {
-  border-radius: 14px;
-  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s ease;
+
+/*=========================================================
+  STAT CARD
+=========================================================*/
+
+.dashboard-card{
+
+    position:relative;
+
+    overflow:hidden;
+
+    background:var(--card);
+
+    border:1px solid var(--border);
+
+    border-radius:24px;
+
+    padding:24px;
+
+    transition:var(--transition);
+
+    box-shadow:var(--shadow-sm);
+
 }
 
-.dashboard-stat-card:hover {
-  transform: translateY(var(--stat-hover-translate));
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08) !important;
+.dashboard-card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:var(--shadow-lg);
+
 }
 
-.stat-icon-wrapper {
-  width: 44px;
-  height: 44px;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  font-size: 0.8rem;
-  letter-spacing: 0.5px;
+
+/*=========================================================
+  TOP BORDER
+=========================================================*/
+
+.dashboard-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    left:0;
+
+    width:100%;
+
+    height:5px;
+
+    background:linear-gradient(
+        90deg,
+        var(--primary),
+        var(--secondary)
+    );
+
 }
 
-.progress-bar-custom {
-  height: 7px;
-  border-radius: 6px;
-  background-color: var(--bs-secondary-bg);
-  overflow: hidden;
+
+/*=========================================================
+  CARD HEADER
+=========================================================*/
+
+.dashboard-card-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:20px;
+
 }
 
-/* Tracking Left Borders for Activities Feed stream rows */
-.recent-activity-row {
-  border-left: 4px solid var(--bs-secondary-border-subtle);
-  padding-left: 14px;
-  margin-bottom: 14px;
-  padding-top: 4px;
-  padding-bottom: 4px;
+
+/*=========================================================
+  ICON
+=========================================================*/
+
+.dashboard-icon{
+
+    width:64px;
+
+    height:64px;
+
+    border-radius:20px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:26px;
+
+    color:#fff;
+
+    background:linear-gradient(
+        135deg,
+        var(--primary),
+        var(--primary-dark)
+    );
+
+    box-shadow:
+
+        0 15px 30px rgba(14,159,110,.25);
+
+    transition:.35s;
+
 }
 
-.recent-activity-row.success-variant { border-left-color: var(--bs-success); }
-.recent-activity-row.primary-variant { border-left-color: var(--bs-primary); }
-.recent-activity-row.warning-variant { border-left-color: var(--bs-warning); }
+.dashboard-card:hover .dashboard-icon{
 
-/* Persistent Responsive Navigation Adjustments */
-body {
-  padding-bottom: 85px !important;
+    transform:rotate(-8deg) scale(1.08);
+
 }
 
-.bottom-nav {
-  z-index: 1040;
-  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.06) !important;
+
+/*=========================================================
+  OPTIONS BUTTON
+=========================================================*/
+
+.dashboard-more{
+
+    width:42px;
+
+    height:42px;
+
+    border-radius:14px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    border:1px solid var(--border);
+
+    background:var(--bg);
+
+    cursor:pointer;
+
+    transition:.30s;
+
 }
 
-.tiny-nav-text {
-  font-size: 0.72rem;
-  font-weight: 500;
-  letter-spacing: -0.1px;
+.dashboard-more:hover{
+
+    background:var(--primary);
+
+    color:#fff;
+
 }
 
-/* Custom Micro Mobile Breakdown Breakpoints (under 400px viewports) */
-@media (max-width: 395px) {
-  .col-100-custom {
-    width: 100% !important;
-  }
-  .dashboard-stat-card {
-    padding: 16px !important;
-  }
+
+/*=========================================================
+  TITLE
+=========================================================*/
+
+.dashboard-title{
+
+    font-size:.85rem;
+
+    font-weight:600;
+
+    color:var(--text-light);
+
+    text-transform:uppercase;
+
+    letter-spacing:.8px;
+
 }
 
-/* Dark mode specific fine-tuning */
-[data-bs-theme="dark"] .dashboard-stat-card:hover {
-  box-shadow: 0 8px 26px rgba(0, 0, 0, 0.35) !important;
+
+/*=========================================================
+  VALUE
+=========================================================*/
+
+.dashboard-value{
+
+    margin-top:10px;
+
+    font-size:2.2rem;
+
+    font-weight:700;
+
+    color:var(--text);
+
 }
-[data-bs-theme="dark"] .recent-activity-row {
-  background: rgba(255, 255, 255, 0.01);
+
+
+/*=========================================================
+  DESCRIPTION
+=========================================================*/
+
+.dashboard-description{
+
+    margin-top:10px;
+
+    color:var(--text-light);
+
+    font-size:.92rem;
+
+}
+
+
+/*=========================================================
+  TREND
+=========================================================*/
+
+.dashboard-trend{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:6px;
+
+    margin-top:18px;
+
+    padding:8px 14px;
+
+    border-radius:50px;
+
+    font-size:.82rem;
+
+    font-weight:700;
+
+}
+
+.dashboard-trend.up{
+
+    background:#DCFCE7;
+
+    color:#15803D;
+
+}
+
+.dashboard-trend.down{
+
+    background:#FEE2E2;
+
+    color:#B91C1C;
+
+}
+
+.dashboard-trend.neutral{
+
+    background:#E5E7EB;
+
+    color:#475569;
+
+}
+
+
+/*=========================================================
+  PROGRESS
+=========================================================*/
+
+.dashboard-progress{
+
+    margin-top:18px;
+
+}
+
+.dashboard-progress .progress{
+
+    height:8px;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    background:#E5E7EB;
+
+}
+
+.dashboard-progress .progress-bar{
+
+    border-radius:20px;
+
+}
+
+
+/*=========================================================
+  MINI FOOTER
+=========================================================*/
+
+.dashboard-footer{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-top:22px;
+
+    padding-top:18px;
+
+    border-top:1px solid var(--border);
+
+    color:var(--text-light);
+
+    font-size:.82rem;
+
+}
+
+
+/*=========================================================
+  GRADIENT CARD
+=========================================================*/
+
+.dashboard-card-gradient{
+
+    color:#fff;
+
+    border:none;
+
+    background:linear-gradient(
+        135deg,
+        var(--primary),
+        var(--primary-dark)
+    );
+
+}
+
+.dashboard-card-gradient .dashboard-title,
+
+.dashboard-card-gradient .dashboard-description,
+
+.dashboard-card-gradient .dashboard-footer,
+
+.dashboard-card-gradient .dashboard-value{
+
+    color:#fff;
+
+}
+
+.dashboard-card-gradient .dashboard-icon{
+
+    background:rgba(255,255,255,.15);
+
+    box-shadow:none;
+
+}
+
+
+/*=========================================================
+  QUICK STATS
+=========================================================*/
+
+.quick-stats{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+
+    gap:20px;
+
+    margin-top:28px;
+
+}
+
+.quick-stat{
+
+    background:var(--card);
+
+    border:1px solid var(--border);
+
+    border-radius:18px;
+
+    padding:20px;
+
+    text-align:center;
+
+    transition:.30s;
+
+}
+
+.quick-stat:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:var(--shadow-md);
+
+}
+
+.quick-stat i{
+
+    font-size:28px;
+
+    color:var(--primary);
+
+    margin-bottom:12px;
+
+}
+
+.quick-stat h3{
+
+    margin:8px 0;
+
+    font-size:1.6rem;
+
+    color:var(--text);
+
+}
+
+.quick-stat p{
+
+    color:var(--text-light);
+
+    margin:0;
+
+}
+
+
+/*=========================================================
+  MINI CHART PLACEHOLDER
+=========================================================*/
+
+.dashboard-chart{
+
+    margin-top:22px;
+
+    height:90px;
+
+    border-radius:16px;
+
+    background:
+
+        repeating-linear-gradient(
+
+            90deg,
+
+            rgba(14,159,110,.08),
+
+            rgba(14,159,110,.08) 8px,
+
+            transparent 8px,
+
+            transparent 16px
+
+        );
+
+}
+
+
+/*=========================================================
+  COLOR VARIANTS
+=========================================================*/
+
+.dashboard-primary{
+
+    border-top:5px solid var(--primary);
+
+}
+
+.dashboard-success{
+
+    border-top:5px solid var(--success);
+
+}
+
+.dashboard-warning{
+
+    border-top:5px solid var(--warning);
+
+}
+
+.dashboard-danger{
+
+    border-top:5px solid var(--danger);
+
+}
+
+.dashboard-info{
+
+    border-top:5px solid var(--secondary);
+
+}
+
+
+/*=========================================================
+  RESPONSIVE
+=========================================================*/
+
+@media(max-width:992px){
+
+.dashboard-grid{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+}
+
+
+@media(max-width:768px){
+
+.dashboard-grid{
+
+grid-template-columns:1fr;
+
+}
+
+.dashboard-card{
+
+padding:20px;
+
+}
+
+.dashboard-value{
+
+font-size:1.8rem;
+
+}
+
+.dashboard-icon{
+
+width:56px;
+
+height:56px;
+
+font-size:22px;
+
+}
+
+.quick-stats{
+
+grid-template-columns:1fr;
+
+}
+
+}
+
+
+@media(max-width:480px){
+
+.dashboard-footer{
+
+flex-direction:column;
+
+align-items:flex-start;
+
+gap:10px;
+
+}
+
+.dashboard-card{
+
+border-radius:20px;
+
+}
+
+}
+
+
+/*=========================================================
+  CARD ANIMATION
+=========================================================*/
+
+@keyframes dashboardFade{
+
+from{
+
+opacity:0;
+
+transform:translateY(25px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+}
+
+.dashboard-card{
+
+animation:dashboardFade .045s ease;
+
+}
+
+
+/*=========================================================
+    DASHBOARD PREMIUM LOADER
+=========================================================*/
+
+.dashboard-loader{
+
+    position:fixed;
+
+    inset:0;
+
+    background:var(--bg);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    z-index:999999;
+
+    transition:
+        opacity .6s ease,
+        visibility .6s ease;
+
+}
+
+.dashboard-loader.hide{
+
+    opacity:0;
+
+    visibility:hidden;
+
+}
+
+
+/*=========================================================
+LOADER CONTENT
+=========================================================*/
+
+.dashboard-loader-content{
+
+    width:340px;
+
+    text-align:center;
+
+}
+
+
+/*=========================================================
+LOGO
+=========================================================*/
+
+.dashboard-loader-logo{
+
+    width:90px;
+
+    height:90px;
+
+    margin:auto;
+
+    border-radius:50%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:linear-gradient(
+        135deg,
+        var(--primary),
+        var(--primary-dark)
+    );
+
+    color:#fff;
+
+    font-size:40px;
+
+    box-shadow:
+        0 15px 40px rgba(14,159,110,.25);
+
+    animation:loaderPulse 1.06s infinite;
+
+}
+
+
+/*=========================================================
+TITLE
+=========================================================*/
+
+.dashboard-loader-title{
+
+    margin-top:22px;
+
+    font-weight:700;
+
+    color:var(--text);
+
+}
+
+
+/*=========================================================
+TEXT
+=========================================================*/
+
+.dashboard-loader-text{
+
+    color:var(--text-light);
+
+    margin:12px 0 24px;
+
+}
+
+
+/*=========================================================
+PROGRESS
+=========================================================*/
+
+.dashboard-loader-progress{
+
+    width:100%;
+
+    height:8px;
+
+    background:#E5E7EB;
+
+    border-radius:50px;
+
+    overflow:hidden;
+
+}
+
+.dashboard-loader-progress-bar{
+
+    width:0;
+
+    height:100%;
+
+    border-radius:50px;
+
+    background:linear-gradient(
+        90deg,
+        var(--primary),
+        var(--secondary)
+    );
+
+    transition:width .25s linear;
+
+}
+
+
+/*=========================================================
+BODY FADE
+=========================================================*/
+
+.page-content{
+
+    opacity:0;
+
+    transform:translateY(20px);
+
+    transition:
+        opacity .7s ease,
+        transform .7s ease;
+
+}
+
+.page-content.loaded{
+
+    opacity:1;
+
+    transform:translateY(0);
+
+}
+
+
+/*=========================================================
+ANIMATION
+=========================================================*/
+
+@keyframes loaderPulse{
+
+    0%{
+
+        transform:scale(1);
+
+    }
+
+    50%{
+
+        transform:scale(1.08);
+
+    }
+
+    100%{
+
+        transform:scale(1);
+
+    }
+
 }
