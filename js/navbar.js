@@ -1,6 +1,6 @@
 /*=========================================================
     MASKIIN CAAWIYE
-    Premium Navbar
+    PREMIUM NAVBAR
 =========================================================*/
 
 "use strict";
@@ -59,11 +59,10 @@ async function loadNavbar() {
 
         console.error(err);
 
-        container.innerHTML =
-        `
-        <div class="text-center text-danger p-3">
-            Failed to load navigation.
-        </div>
+        container.innerHTML = `
+            <div class="text-center text-danger p-4">
+                Failed to load navigation.
+            </div>
         `;
 
     }
@@ -80,6 +79,8 @@ function initializeNavbar() {
 
     initializeNavigation();
 
+    initializeSidebar();
+
     updateTheme();
 
     translateNavbar();
@@ -95,19 +96,19 @@ function highlightCurrentPage() {
     const page = location.pathname
         .split("/")
         .pop()
-        .replace(".html","");
+        .replace(".html", "");
 
     document
-        .querySelectorAll(".mc-nav-link")
-        .forEach(link=>{
+        .querySelectorAll(".mc-nav-link,.mc-sidebar-link")
+        .forEach(link => {
 
-            if(link.dataset.page===page){
+            if (link.dataset.page === page) {
 
                 link.classList.add("active");
 
             }
 
-            else{
+            else {
 
                 link.classList.remove("active");
 
@@ -118,16 +119,16 @@ function highlightCurrentPage() {
 }
 
 /*=========================================================
-    NAVIGATION
+    NAVIGATION EFFECT
 =========================================================*/
 
-function initializeNavigation(){
+function initializeNavigation() {
 
     document
-        .querySelectorAll(".mc-nav-link")
-        .forEach(link=>{
+        .querySelectorAll(".mc-nav-link,.mc-sidebar-link")
+        .forEach(link => {
 
-            link.addEventListener("click",function(){
+            link.addEventListener("click", function () {
 
                 this.classList.add("clicked");
 
@@ -138,10 +139,110 @@ function initializeNavigation(){
 }
 
 /*=========================================================
+    SIDEBAR
+=========================================================*/
+
+function initializeSidebar() {
+
+    const sidebar =
+        document.getElementById("mcSidebar");
+
+    const overlay =
+        document.getElementById("mcSidebarOverlay");
+
+    const toggle =
+        document.getElementById("sidebarToggle");
+
+    const pageContent =
+        document.querySelector(".page-content");
+
+    if (!sidebar) return;
+
+    // Restore saved state
+    const collapsed =
+        localStorage.getItem("mc_sidebar") === "collapsed";
+
+    sidebar.classList.toggle("collapsed", collapsed);
+
+    document.body.classList.toggle(
+        "sidebar-collapsed",
+        collapsed
+    );
+
+    pageContent?.classList.toggle(
+        "expanded",
+        collapsed
+    );
+
+    if (toggle) {
+
+        toggle.onclick = () => {
+
+            // Mobile
+            if (window.innerWidth <= 992) {
+
+                sidebar.classList.toggle("show");
+
+                overlay?.classList.toggle("show");
+
+                return;
+
+            }
+
+            // Desktop
+            sidebar.classList.toggle("collapsed");
+
+            const isCollapsed =
+                sidebar.classList.contains("collapsed");
+
+            document.body.classList.toggle(
+                "sidebar-collapsed",
+                isCollapsed
+            );
+
+            pageContent?.classList.toggle(
+                "expanded",
+                isCollapsed
+            );
+
+            localStorage.setItem(
+                "mc_sidebar",
+                isCollapsed
+                    ? "collapsed"
+                    : "expanded"
+            );
+
+        };
+
+    }
+
+    overlay?.addEventListener("click", () => {
+
+        sidebar.classList.remove("show");
+
+        overlay?.classList.remove("show");
+
+    });
+
+    window.addEventListener("resize", () => {
+
+        if (window.innerWidth > 992) {
+
+            sidebar.classList.remove("show");
+
+            overlay?.classList.remove("show");
+
+        }
+
+    });
+
+}
+
+/*=========================================================
     THEME
 =========================================================*/
 
-function updateTheme(){
+function updateTheme() {
 
     const theme =
         localStorage.getItem("mc_theme") || "light";
@@ -157,26 +258,26 @@ function updateTheme(){
     TRANSLATION
 =========================================================*/
 
-function translateNavbar(){
+function translateNavbar() {
 
-    if(typeof translations==="undefined") return;
+    if (typeof translations === "undefined") return;
 
     const lang =
         localStorage.getItem("mc_language") || "en";
 
     document
         .querySelectorAll("#navbarContainer [data-i18n]")
-        .forEach(item=>{
+        .forEach(item => {
 
-            const key=item.dataset.i18n;
+            const key = item.dataset.i18n;
 
-            if(
+            if (
                 translations[lang] &&
                 translations[lang][key]
-            ){
+            ) {
 
-                item.textContent=
-                translations[lang][key];
+                item.textContent =
+                    translations[lang][key];
 
             }
 
@@ -188,7 +289,7 @@ function translateNavbar(){
     PUBLIC FUNCTIONS
 =========================================================*/
 
-window.refreshNavbar=function(){
+window.refreshNavbar = function () {
 
     highlightCurrentPage();
 
@@ -198,7 +299,7 @@ window.refreshNavbar=function(){
 
 };
 
-window.clearNavbarCache=function(){
+window.clearNavbarCache = function () {
 
     sessionStorage.removeItem(
         NAVBAR_CACHE_KEY
@@ -206,7 +307,39 @@ window.clearNavbarCache=function(){
 
 };
 
-window.addEventListener("pageshow",()=>{
+window.openSidebar = function () {
+
+    document
+        .getElementById("mcSidebar")
+        ?.classList.add("show");
+
+    document
+        .getElementById("mcSidebarOverlay")
+        ?.classList.add("show");
+
+};
+
+window.closeSidebar = function () {
+
+    document
+        .getElementById("mcSidebar")
+        ?.classList.remove("show");
+
+    document
+        .getElementById("mcSidebarOverlay")
+        ?.classList.remove("show");
+
+};
+
+window.toggleSidebar = function () {
+
+    document
+        .getElementById("sidebarToggle")
+        ?.click();
+
+};
+
+window.addEventListener("pageshow", () => {
 
     refreshNavbar();
 
